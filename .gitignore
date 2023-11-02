@@ -1,0 +1,5 @@
+# env with MongoDB credentials
+.env
+
+# node_modules folder containing all dependencies (dotenv, express, mongo, etc.)
+node_modules/

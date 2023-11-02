@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html>
+    <head>
+      <title>Presentation Page</title>
+      <meta property="og:title" content="Presentation Page" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta charset="utf-8" />
+      <meta property="twitter:card" content="summary_large_image" />
+
+      <style data-tag="reset-style-sheet">
+        html {
+          line-height: 1.15;
+        }
+        body {
+          margin: 0;
+        }
+        * {
+          box-sizing: border-box;
+          border-width: 0;
+          border-style: solid;
+        }
+        p,
+        li,
+        ul,
+        pre,
+        div,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        figure,
+        blockquote,
+        figcaption {
+          margin: 0;
+          padding: 0;
+        }
+        button {
+          background-color: transparent;
+        }
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+          font-family: inherit;
+          font-size: 100%;
+          line-height: 1.15;
+          margin: 0;
+        }
+        button,
+        select {
+          text-transform: none;
+        }
+        button,
+        [type="button"],
+        [type="reset"],
+        [type="submit"] {
+          -webkit-appearance: button;
+        }
+        button::-moz-focus-inner,
+        [type="button"]::-moz-focus-inner,
+        [type="reset"]::-moz-focus-inner,
+        [type="submit"]::-moz-focus-inner {
+          border-style: none;
+          padding: 0;
+        }
+        button:-moz-focus,
+        [type="button"]:-moz-focus,
+        [type="reset"]:-moz-focus,
+        [type="submit"]:-moz-focus {
+          outline: 1px dotted ButtonText;
+        }
+        a {
+          color: inherit;
+          text-decoration: inherit;
+        }
+        input {
+          padding: 2px 4px;
+        }
+        img {
+          display: block;
+        }
+        html {
+          scroll-behavior: smooth;
+        }
+      </style>
+      <style data-tag="default-style-sheet">
+        html {
+          font-family: Open Sans;
+          font-size: 18px;
+        }
+
+        body {
+          font-weight: 400;
+          font-style: normal;
+          text-decoration: none;
+          text-transform: none;
+          letter-spacing: normal;
+          line-height: 1.55;
+          color: var(--dl-color-gray-black);
+          background-color: var(--dl-color-gray-white);
+        }
+      </style>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&amp;display=swap"
+        data-tag="font"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+        data-tag="font"
+      />
+      <style>
+        html {
+          scroll-behavior: smooth;
+        }
+      </style>
+    </head>
+    <body>
+      <!-- Inline styling because unless I use express (or some other module, this won't work well)-->
+      <style>
+        :root {
+          --dl-color-gray-500: #999999;
+          --dl-color-gray-700: #d9d9d9;
+          --dl-color-gray-900: #eaeaeaff;
+          --dl-color-gray-black: #000000;
+          --dl-color-gray-white: #ffffff;
+          --dl-space-space-unit: 8px;
+          --dl-color-primary-100: #3a26efff;
+          --dl-color-primary-500: #8469deff;
+          --dl-color-primary-700: #9a91e2ff;
+          --dl-radius-radius-round: 50%;
+          --dl-size-size-maxcontent: 1414px;
+          --dl-space-space-halfunit: 4px;
+          --dl-space-space-tenunits: 80px;
+          --dl-radius-radius-radius2: 2px;
+          --dl-radius-radius-radius4: 4px;
+          --dl-radius-radius-radius8: 8px;
+          --dl-space-space-fiveunits: 40px;
+          --dl-space-space-fourunits: 32px;
+          --dl-space-space-doubleunit: 16px;
+          --dl-space-space-tripleunit: 24px;
+        }
+        .teleport-show {
+          display: flex !important;
+          transform: none !important;
+        }
+        .list-item {
+          display: list-item;
+        }
+        .button {
+          color: var(--dl-color-gray-black);
+          display: inline-block;
+          padding: 0.5rem 1rem;
+          font-family: Open Sans;
+          border-color: var(--dl-color-gray-black);
+          border-width: 1px;
+          border-radius: 4px;
+          background-color: var(--dl-color-gray-white);
+        }
+        .list {
+          width: 100%;
+          margin: 1em 0px 1em 0px;
+          display: block;
+          padding: 0px 0px 0px 1.5rem;
+          list-style-type: none;
+          list-style-position: outside;
+        }
+        .textarea {
+          color: var(--dl-color-gray-black);
+          cursor: auto;
+          padding: 0.5rem;
+          font-family: Open Sans;
+          border-color: var(--dl-color-gray-black);
+          border-width: 1px;
+          border-radius: 4px;
+          background-color: var(--dl-color-gray-white);
+        }
+        .input {
+          color: var(--dl-color-gray-black);
+          cursor: auto;
+          padding: 0.5rem 1rem;
+          font-family: Open Sans;
+          border-color: var(--dl-color-gray-black);
+          border-width: 1px;
+          border-radius: 4px;
+          background-color: var(--dl-color-gray-white);
+        }
+        .Section-Text {
+          font-size: 18px;
+          font-family: Open Sans;
+          font-weight: 400;
+          line-height: 1.55;
+          text-transform: none;
+          text-decoration: none;
+        }
+        .Card-Text {
+          font-size: 16px;
+          font-style: normal;
+          font-family: Open Sans;
+          font-weight: 400;
+          line-height: 1.55;
+          text-transform: none;
+          text-decoration: none;
+        }
+        .BigCard-Heading {
+          font-size: 36px;
+          font-style: normal;
+          font-family: Roboto;
+          font-weight: 700;
+          line-height: 1.55;
+          text-transform: none;
+          text-decoration: none;
+        }
+        .Content {
+          font-size: 16px;
+          font-family: Arial;
+          font-weight: 400;
+          line-height: 1.55;
+          text-transform: none;
+          text-decoration: none;
+        }
+        .Card-Heading {
+          font-size: 24px;
+          font-style: normal;
+          font-family: Roboto;
+          font-weight: 700;
+          line-height: 1.55;
+          text-transform: none;
+          text-decoration: none;
+        }
+        .Anchor {
+          font-size: 18px;
+          font-style: normal;
+          font-family: Roboto;
+          font-weight: 700;
+          line-height: 1.55;
+          text-transform: capitalize;
+          text-decoration: none;
+        }
+        .Section-Heading {
+          font-size: 48px;
+          font-family: Roboto;
+          font-weight: 700;
+          line-height: 1.22;
+          text-transform: none;
+          text-decoration: none;
+        }
+      </style>
+      <div>
+        <!-- Inline styling because unless I use express (or some other module, this won't work well)-->
+        <style>
+          .home-container {
+            width: 100%;
+            height: auto;
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            flex-direction: column;
+          }
+          .home-navbar-container {
+            top: 0;
+            width: 100%;
+            border: 2px dashed rgba(120, 120, 120, 0.4);
+            height: 100px;
+            display: flex;
+            z-index: 100;
+            position: sticky;
+            box-shadow: 5px 5px 10px 0px #d4d4d4;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--dl-color-gray-white);
+          }
+          .home-hero {
+            width: 100%;
+            display: flex;
+            max-width: var(--dl-size-size-maxcontent);
+            margin-top: var(--dl-space-space-fiveunits);
+            align-items: center;
+            padding-top: var(--dl-space-space-fiveunits);
+            padding-left: var(--dl-space-space-tripleunit);
+            margin-bottom: var(--dl-space-space-fiveunits);
+            padding-right: var(--dl-space-space-tripleunit);
+            flex-direction: row;
+            padding-bottom: var(--dl-space-space-fiveunits);
+            justify-content: space-between;
+          }
+          .home-hero-text-container {
+            width: 35%;
+            display: flex;
+            align-items: flex-start;
+            margin-left: 50px;
+            flex-direction: column;
+          }
+          .home-heading {
+            margin-bottom: var(--dl-space-space-tripleunit);
+          }
+          .home-text {
+            color: var(--dl-color-gray-500);
+            margin-bottom: var(--dl-space-space-tripleunit);
+          }
+          .home-cta-btn {
+            color: var(--dl-color-gray-white);
+            align-self: stretch;
+            text-align: center;
+            padding-top: var(--dl-space-space-doubleunit);
+            border-width: 0px;
+            border-radius: 34px;
+            padding-bottom: var(--dl-space-space-doubleunit);
+            background-color: var(--dl-color-primary-100);
+          }
+          .home-image {
+            width: 50%;
+            object-fit: contain;
+          }
+          .home-section-separator {
+            width: 100%;
+            height: 1px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            background-color: var(--dl-color-gray-700);
+          }
+          .home-about-us {
+            width: 100%;
+            display: flex;
+            max-width: var(--dl-size-size-maxcontent);
+            align-items: flex-start;
+            padding-top: var(--dl-space-space-tenunits);
+            padding-left: var(--dl-space-space-tripleunit);
+            padding-right: var(--dl-space-space-tripleunit);
+            flex-direction: row;
+            padding-bottom: var(--dl-space-space-fiveunits);
+            justify-content: center;
+          }
+          .home-heading-container {
+            width: 35%;
+            display: flex;
+            align-items: flex-start;
+            margin-right: var(--dl-space-space-fiveunits);
+            flex-direction: column;
+          }
+          .home-text04 {
+            margin-bottom: var(--dl-space-space-tripleunit);
+          }
+          .home-secondary-text {
+            color: var(--dl-color-gray-500);
+            margin-bottom: var(--dl-space-space-tripleunit);
+          }
+          .home-cta-btn1 {
+            color: var(--dl-color-gray-white);
+            width: 80%;
+            align-self: flex-start;
+            text-align: center;
+            padding-top: var(--dl-space-space-doubleunit);
+            border-width: 0px;
+            border-radius: 34px;
+            padding-bottom: var(--dl-space-space-doubleunit);
+            background-color: var(--dl-color-primary-100);
+          }
+          .home-text-container {
+            width: 45%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+          .home-text07 {
+            color: var(--dl-color-gray-500);
+          }
+          .home-text08 {
+            color: var(--dl-color-gray-500);
+          }
+          .home-cta-btn2 {
+            color: var(--dl-color-gray-white);
+            width: 80%;
+            display: none;
+            align-self: flex-start;
+            text-align: center;
+            padding-top: var(--dl-space-space-doubleunit);
+            border-width: 0px;
+            border-radius: 34px;
+            padding-bottom: var(--dl-space-space-doubleunit);
+            background-color: var(--dl-color-primary-100);
+          }
+          .home-section-separator1 {
+            width: 100%;
+            height: 1px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            background-color: var(--dl-color-gray-700);
+          }
+          .home-testimonials {
+            width: 100%;
+            display: flex;
+            max-width: var(--dl-size-size-maxcontent);
+            align-items: center;
+            padding-top: var(--dl-space-space-tenunits);
+            padding-left: var(--dl-space-space-tripleunit);
+            margin-bottom: var(--dl-space-space-fiveunits);
+            padding-right: var(--dl-space-space-tripleunit);
+            flex-direction: column;
+            padding-bottom: var(--dl-space-space-fiveunits);
+          }
+          .home-text09 {
+            margin-bottom: var(--dl-space-space-fiveunits);
+          }
+          .home-cards-container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: var(--dl-space-space-doubleunit);
+            align-items: flex-start;
+            flex-direction: row;
+            justify-content: space-between;
+          }
+          .home-testimonial-card {
+            width: 30%;
+            display: flex;
+            padding: var(--dl-space-space-fourunits);
+            align-items: center;
+            padding-top: var(--dl-space-space-doubleunit);
+            border-color: var(--dl-color-gray-500);
+            border-width: 1px;
+            padding-left: var(--dl-space-space-doubleunit);
+            border-radius: var(--dl-radius-radius-radius4);
+            padding-right: var(--dl-space-space-doubleunit);
+            flex-direction: column;
+            padding-bottom: var(--dl-space-space-doubleunit);
+          }
+          .home-card-heading {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            padding-top: var(--dl-space-space-doubleunit);
+            border-color: var(--dl-color-gray-500);
+            border-width: 1px;
+            margin-bottom: var(--dl-space-space-fourunits);
+            flex-direction: row;
+            padding-bottom: var(--dl-space-space-doubleunit);
+            justify-content: space-between;
+            border-top-width: 0px;
+            border-left-width: 0px;
+            border-right-width: 0px;
+          }
+          .home-name-and-position {
+            width: 50%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: flex-start;
+          }
+          .home-position {
+            color: var(--dl-color-gray-700);
+          }
+          .home-stars-container {
+            width: 50%;
+            display: flex;
+            margin-top: var(--dl-space-space-unit);
+            align-items: flex-start;
+            flex-direction: row;
+          }
+          .home-icon {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon02 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon04 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon06 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon08 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+          }
+          .home-text10 {
+            color: var(--dl-color-gray-500);
+            text-align: left;
+          }
+          .home-testimonial-card1 {
+            width: 30%;
+            display: flex;
+            padding: var(--dl-space-space-fourunits);
+            align-items: center;
+            padding-top: var(--dl-space-space-doubleunit);
+            border-color: var(--dl-color-gray-500);
+            border-width: 1px;
+            padding-left: var(--dl-space-space-doubleunit);
+            border-radius: var(--dl-radius-radius-radius4);
+            padding-right: var(--dl-space-space-doubleunit);
+            flex-direction: column;
+            padding-bottom: var(--dl-space-space-doubleunit);
+          }
+          .home-card-heading1 {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            padding-top: var(--dl-space-space-doubleunit);
+            border-color: var(--dl-color-gray-500);
+            border-width: 1px;
+            margin-bottom: var(--dl-space-space-fourunits);
+            flex-direction: row;
+            padding-bottom: var(--dl-space-space-doubleunit);
+            justify-content: space-between;
+            border-top-width: 0px;
+            border-left-width: 0px;
+            border-right-width: 0px;
+          }
+          .home-name-and-position1 {
+            width: 50%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: flex-start;
+          }
+          .home-position1 {
+            color: var(--dl-color-gray-700);
+          }
+          .home-stars-container1 {
+            width: 50%;
+            display: flex;
+            margin-top: var(--dl-space-space-unit);
+            align-items: flex-start;
+            flex-direction: row;
+          }
+          .home-icon10 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon12 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon14 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon16 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon18 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+          }
+          .home-text11 {
+            color: var(--dl-color-gray-500);
+            text-align: left;
+          }
+          .home-testimonial-card2 {
+            width: 30%;
+            display: flex;
+            padding: var(--dl-space-space-fourunits);
+            align-items: center;
+            padding-top: var(--dl-space-space-doubleunit);
+            border-color: var(--dl-color-gray-500);
+            border-width: 1px;
+            padding-left: var(--dl-space-space-doubleunit);
+            border-radius: var(--dl-radius-radius-radius4);
+            padding-right: var(--dl-space-space-doubleunit);
+            flex-direction: column;
+            padding-bottom: var(--dl-space-space-doubleunit);
+          }
+          .home-card-heading2 {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            padding-top: var(--dl-space-space-doubleunit);
+            border-color: var(--dl-color-gray-500);
+            border-width: 1px;
+            margin-bottom: var(--dl-space-space-fourunits);
+            flex-direction: row;
+            padding-bottom: var(--dl-space-space-doubleunit);
+            justify-content: space-between;
+            border-top-width: 0px;
+            border-left-width: 0px;
+            border-right-width: 0px;
+          }
+          .home-name-and-position2 {
+            width: 50%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: flex-start;
+          }
+          .home-position2 {
+            color: var(--dl-color-gray-700);
+          }
+          .home-stars-container2 {
+            width: 50%;
+            display: flex;
+            margin-top: var(--dl-space-space-unit);
+            align-items: flex-start;
+            flex-direction: row;
+          }
+          .home-icon20 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon22 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon24 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon26 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-unit);
+          }
+          .home-icon28 {
+            fill: var(--dl-color-primary-500);
+            width: 24px;
+            height: 24px;
+          }
+          .home-text12 {
+            color: var(--dl-color-gray-500);
+            text-align: left;
+          }
+          .home-contact {
+            width: 100%;
+            display: flex;
+            max-width: var(--dl-size-size-maxcontent);
+            align-items: flex-start;
+            padding-top: var(--dl-space-space-tenunits);
+            padding-left: var(--dl-space-space-tripleunit);
+            flex-direction: row;
+            padding-bottom: var(--dl-space-space-fiveunits);
+            justify-content: space-between;
+          }
+          .home-content-container {
+            width: 50%;
+            display: flex;
+            padding: var(--dl-space-space-fiveunits);
+            align-self: stretch;
+            align-items: flex-start;
+            border-color: var(--dl-color-gray-700);
+            border-width: 1px;
+            flex-direction: column;
+            justify-content: flex-start;
+            border-left-width: 0px;
+            border-right-width: 0px;
+            border-bottom-width: 0px;
+          }
+          .home-text13 {
+            margin-top: var(--dl-space-space-fiveunits);
+            margin-bottom: var(--dl-space-space-fiveunits);
+          }
+          .home-locations-container {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--dl-space-space-fiveunits);
+            flex-direction: row;
+          }
+          .home-location-1 {
+            display: flex;
+            align-items: flex-start;
+            margin-right: var(--dl-space-space-fourunits);
+            flex-direction: column;
+          }
+          .home-heading1 {
+            font-size: 24px;
+            font-style: normal;
+            font-family: "Roboto";
+            font-weight: 700;
+            margin-bottom: var(--dl-space-space-doubleunit);
+          }
+          .home-adress {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--dl-space-space-doubleunit);
+            flex-direction: row;
+          }
+          .home-icon30 {
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-doubleunit);
+          }
+          .home-email {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--dl-space-space-doubleunit);
+            flex-direction: row;
+          }
+          .home-icon32 {
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-doubleunit);
+          }
+          .home-phone {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--dl-space-space-doubleunit);
+            flex-direction: row;
+          }
+          .home-icon34 {
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-doubleunit);
+          }
+          .home-social-links-container {
+            display: flex;
+            align-self: flex-start;
+            margin-top: var(--dl-space-space-fiveunits);
+            align-items: flex-start;
+            flex-direction: row;
+          }
+          .home-link {
+            display: contents;
+          }
+          .home-icon36 {
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-doubleunit);
+            text-decoration: none;
+          }
+          .home-link1 {
+            display: contents;
+          }
+          .home-icon38 {
+            width: 24px;
+            height: 24px;
+            margin-right: var(--dl-space-space-doubleunit);
+            text-decoration: none;
+          }
+          .home-image1 {
+            width: 50%;
+            object-fit: cover;
+          }
+          @media (max-width: 991px) {
+            .home-hero {
+              flex-direction: column-reverse;
+            }
+            .home-hero-text-container {
+              width: 80%;
+              margin-left: 0px;
+            }
+            .home-cta-btn {
+              width: 40%;
+            }
+            .home-text02 {
+              width: 40%;
+            }
+            .home-image {
+              width: 80%;
+              margin-bottom: var(--dl-space-space-tripleunit);
+            }
+            .home-about-us {
+              flex-direction: column;
+            }
+            .home-heading-container {
+              width: 100%;
+              margin-right: 0px;
+              margin-bottom: var(--dl-space-space-tripleunit);
+            }
+            .home-cta-btn1 {
+              width: 40%;
+              display: none;
+            }
+            .home-text-container {
+              width: 100%;
+            }
+            .home-cta-btn2 {
+              width: 280px;
+              display: block;
+              margin-top: var(--dl-space-space-doubleunit);
+            }
+            .home-locations-container {
+              flex-wrap: wrap;
+            }
+            .home-location-1 {
+              margin-bottom: var(--dl-space-space-tripleunit);
+            }
+            .home-image1 {
+              align-self: center;
+            }
+          }
+          @media (max-width: 767px) {
+            .home-heading {
+              text-align: center;
+            }
+            .home-text {
+              text-align: center;
+            }
+            .home-cta-btn {
+              width: auto;
+              align-self: center;
+            }
+            .home-text02 {
+              width: auto;
+              align-self: center;
+            }
+            .home-about-us {
+              align-items: center;
+            }
+            .home-heading-container {
+              align-items: center;
+            }
+            .home-text04 {
+              text-align: center;
+            }
+            .home-text05 {
+              text-align: center;
+            }
+            .home-secondary-text {
+              text-align: center;
+            }
+            .home-text09 {
+              text-align: center;
+            }
+            .home-cards-container {
+              align-items: center;
+              flex-direction: column;
+            }
+            .home-testimonial-card {
+              width: 70%;
+              margin-bottom: var(--dl-space-space-tripleunit);
+            }
+            .home-stars-container {
+              justify-content: flex-end;
+            }
+            .home-testimonial-card1 {
+              width: 70%;
+              margin-bottom: var(--dl-space-space-tripleunit);
+            }
+            .home-stars-container1 {
+              justify-content: flex-end;
+            }
+            .home-testimonial-card2 {
+              width: 70%;
+              margin-bottom: var(--dl-space-space-tripleunit);
+            }
+            .home-stars-container2 {
+              justify-content: flex-end;
+            }
+            .home-contact {
+              padding-right: var(--dl-space-space-tripleunit);
+              flex-direction: column;
+            }
+            .home-content-container {
+              width: 100%;
+            }
+            .home-image1 {
+              width: 100%;
+            }
+          }
+          @media (max-width: 479px) {
+            .home-hero-text-container {
+              width: 100%;
+            }
+            .home-image {
+              width: 100%;
+            }
+            .home-secondary-text {
+              text-align: center;
+            }
+            .home-text09 {
+              text-align: center;
+            }
+            .home-testimonial-card {
+              width: 100%;
+            }
+            .home-testimonial-card1 {
+              width: 100%;
+            }
+            .home-testimonial-card2 {
+              width: 100%;
+            }
+            .home-content-container {
+              padding-left: 0px;
+              padding-right: 0px;
+            }
+            .home-text13 {
+              text-align: center;
+            }
+            .home-locations-container {
+              margin-bottom: 0px;
+            }
+            .home-location-1 {
+              margin-right: 0px;
+            }
+            .home-social-links-container {
+              align-self: center;
+            }
+          }
+        </style>
+        <div class="home-container">
+          <div data-role="Header" class="home-navbar-container"></div>
+          <div class="home-hero">
+            <div class="home-hero-text-container">
+              <h1 class="home-heading">Best Halloween Party</h1>
+              <span class="home-text">
+                Having a party at my house, come over! There's a notable lack of
+                information here just because why not; we really are only doing
+                things for testing! Pull from DB and leave stuff here!
+              </span>
+              <button class="home-cta-btn button">
+                <span>
+                  <span class="Anchor home-text02">RSVP TO PARTY NOW</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <img
+              alt="image"
+              src="https://images.unsplash.com/photo-1509558848685-d51aecf76271?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDJ8fEhhbGxvd2VlbiUyMHBhcnR5fGVufDB8fHx8MTY5ODk0MjMyNHww&amp;ixlib=rb-4.0.3&amp;w=1500"
+              class="home-image"
+            />
+          </div>
+          <div class="home-section-separator"></div>
+          <div id="about-us" class="home-about-us">
+            <div class="home-heading-container">
+              <h2 class="home-text04">
+                <span class="Section-Heading home-text05">Party Details</span>
+                <br />
+              </h2>
+              <span class="home-secondary-text Section-Text">
+                Location, age requirements, you name it; we have it!
+              </span>
+              <button class="home-cta-btn1 button Anchor">
+                RSVP TO PARTY NOW
+              </button>
+            </div>
+            <div class="home-text-container">
+              <span class="home-text07 Section-Text"> Filler </span>
+              <span class="home-text08 Section-Text"> More filler </span>
+            </div>
+            <button class="home-cta-btn2 button Anchor">START BUILDING</button>
+          </div>
+          <div class="home-section-separator1"></div>
+          <div class="home-testimonials">
+            <h2 class="home-text09 Section-Heading">Host Reviews</h2>
+            <div class="home-cards-container">
+              <div class="home-testimonial-card">
+                <div class="home-card-heading">
+                  <div class="home-name-and-position">
+                    <span class="Card-Heading">Will Evans</span>
+                    <span class="home-position Card-Text">Position</span>
+                  </div>
+                  <div class="home-stars-container">
+                    <svg viewBox="0 0 950.8571428571428 1024" class="home-icon">
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon02"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon04"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon06"
+                    >
+                      <path
+                        d="M649.714 573.714l174.857-169.714-241.143-35.429-108-218.286-108 218.286-241.143 35.429 174.857 169.714-41.714 240.571 216-113.714 215.429 113.714zM950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 15.429-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon08"
+                    >
+                      <path
+                        d="M649.714 573.714l174.857-169.714-241.143-35.429-108-218.286-108 218.286-241.143 35.429 174.857 169.714-41.714 240.571 216-113.714 215.429 113.714zM950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 15.429-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <span class="home-text10 Card-Text"> What the hell </span>
+              </div>
+              <div class="home-testimonial-card1">
+                <div class="home-card-heading1">
+                  <div class="home-name-and-position1">
+                    <span class="Card-Heading">Marie Alba</span>
+                    <span class="home-position1 Card-Text">Position</span>
+                  </div>
+                  <div class="home-stars-container1">
+                    <svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon10"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon12"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon14"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon16"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon18"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <span class="home-text11 Card-Text"> What the hell </span>
+              </div>
+              <div class="home-testimonial-card2">
+                <div class="home-card-heading2">
+                  <div class="home-name-and-position2">
+                    <span class="Card-Heading">Taylor Sam</span>
+                    <span class="home-position2 Card-Text">Position</span>
+                  </div>
+                  <div class="home-stars-container2">
+                    <svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon20"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon22"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon24"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon26"
+                    >
+                      <path
+                        d="M950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 14.857-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path></svg
+                    ><svg
+                      viewBox="0 0 950.8571428571428 1024"
+                      class="home-icon28"
+                    >
+                      <path
+                        d="M649.714 573.714l174.857-169.714-241.143-35.429-108-218.286-108 218.286-241.143 35.429 174.857 169.714-41.714 240.571 216-113.714 215.429 113.714zM950.857 369.714c0 10.286-7.429 20-14.857 27.429l-207.429 202.286 49.143 285.714c0.571 4 0.571 7.429 0.571 11.429 0 15.429-6.857 28.571-23.429 28.571-8 0-16-2.857-22.857-6.857l-256.571-134.857-256.571 134.857c-7.429 4-14.857 6.857-22.857 6.857-16.571 0-24-13.714-24-28.571 0-4 0.571-7.429 1.143-11.429l49.143-285.714-208-202.286c-6.857-7.429-14.286-17.143-14.286-27.429 0-17.143 17.714-24 32-26.286l286.857-41.714 128.571-260c5.143-10.857 14.857-23.429 28-23.429s22.857 12.571 28 23.429l128.571 260 286.857 41.714c13.714 2.286 32 9.143 32 26.286z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <span class="home-text12 Card-Text"> What the hell </span>
+              </div>
+            </div>
+          </div>
+          <div id="contact" class="home-contact">
+            <div class="home-content-container">
+              <h2 class="home-text13">
+                <span>Contact the Host!</span>
+                <br />
+              </h2>
+              <div class="home-locations-container">
+                <div class="home-location-1">
+                  <span class="home-heading1">Host Information</span>
+                  <div class="home-adress">
+                    <svg viewBox="0 0 1024 1024" class="home-icon30">
+                      <path
+                        d="M512 0c-176.732 0-320 143.268-320 320 0 320 320 704 320 704s320-384 320-704c0-176.732-143.27-320-320-320zM512 512c-106.040 0-192-85.96-192-192s85.96-192 192-192 192 85.96 192 192-85.96 192-192 192z"
+                      ></path>
+                    </svg>
+                    <span class="Section-Text">Address</span>
+                  </div>
+                  <div class="home-email">
+                    <svg viewBox="0 0 1024 1024" class="home-icon32">
+                      <path
+                        d="M854 342v-86l-342 214-342-214v86l342 212zM854 170q34 0 59 26t25 60v512q0 34-25 60t-59 26h-684q-34 0-59-26t-25-60v-512q0-34 25-60t59-26h684z"
+                      ></path>
+                    </svg>
+                    <span class="Section-Text">E-mail Address</span>
+                  </div>
+                  <div class="home-phone">
+                    <svg
+                      viewBox="0 0 804.5714285714286 1024"
+                      class="home-icon34"
+                    >
+                      <path
+                        d="M804.571 708.571c0 20.571-9.143 60.571-17.714 79.429-12 28-44 46.286-69.714 60.571-33.714 18.286-68 29.143-106.286 29.143-53.143 0-101.143-21.714-149.714-39.429-34.857-12.571-68.571-28-100-47.429-97.143-60-214.286-177.143-274.286-274.286-19.429-31.429-34.857-65.143-47.429-100-17.714-48.571-39.429-96.571-39.429-149.714 0-38.286 10.857-72.571 29.143-106.286 14.286-25.714 32.571-57.714 60.571-69.714 18.857-8.571 58.857-17.714 79.429-17.714 4 0 8 0 12 1.714 12 4 24.571 32 30.286 43.429 18.286 32.571 36 65.714 54.857 97.714 9.143 14.857 26.286 33.143 26.286 50.857 0 34.857-103.429 85.714-103.429 116.571 0 15.429 14.286 35.429 22.286 49.143 57.714 104 129.714 176 233.714 233.714 13.714 8 33.714 22.286 49.143 22.286 30.857 0 81.714-103.429 116.571-103.429 17.714 0 36 17.143 50.857 26.286 32 18.857 65.143 36.571 97.714 54.857 11.429 5.714 39.429 18.286 43.429 30.286 1.714 4 1.714 8 1.714 12z"
+                      ></path>
+                    </svg>
+                    <span class="Section-Text">Phone Number</span>
+                  </div>
+                </div>
+              </div>
+              <div class="home-social-links-container">
+                <!-- Required for Facebook share button functionality -->
+                <script>
+                  window.fbAsyncInit = function () {
+                    FB.init({
+                      appId: "your-app-id",
+                      xfbml: true,
+                      version: "v18.0",
+                    });
+                  };
+                </script>
+                <script
+                  async
+                  defer
+                  crossorigin="anonymous"
+                  src="https://connect.facebook.net/en_US/sdk.js"
+                ></script>
+                <!-- Required for Twitter share button functionality-->
+                <script
+                  async
+                  src="https://platform.twitter.com/widgets.js"
+                  charset="utf-8"
+                ></script>
+                <!--Share to Twitter with pre-populated post-->
+                <script>
+                  //Define the tweet text
+                  let tweetText =
+                    "Hello World, this is a test to see how to tweet! See party details here:"; //Pull information from party_listings data
+
+                  //URL to share to Twitter from the database (Twitter auto shortens some URLs, maybe use a URL shortener?)
+                  let tweetURL = `https://twitter.com/intent/tweet?text=${tweetText}&url=https://partysafari.com/party_listings?party=${"<%= partyID %>"}`; //ID from party_listings data
+
+                  //Twitter share button
+                  const tweetButton = document.createElement("a");
+                  tweetButton.setAttribute("href", tweetURL);
+                  tweetButton.setAttribute("class", "twitter-share-button");
+                  tweetButton.setAttribute("data-size", "large");
+                  document.body.appendChild(tweetButton);
+                </script>
+
+                <!--Share to Facebook with pre-populated post-->
+                <script>
+                  //Define URL to share to Facebook from the database
+                  let fbURL = `https://partysafari.com/party_listings?party=${"<%= partyID %>"}`; //ID from party_listings data
+
+                  //Facebook share button
+                  const fbButton = document.createElement("div");
+                  fbButton.setAttribute("class", "fb-share-button");
+                  fbButton.setAttribute("data-href", fbURL);
+                  fbButton.setAttribute("data-layout", "button");
+                  fbButton.setAttribute("data-size", "large");
+                  fbButton.setAttribute("data-mobile-iframe", "true");
+                  document.body.appendChild(fbButton);
+                </script>
+              </div>
+            </div>
+            <img alt="image" src="public/default-img.svg" class="home-image1" />
+          </div>
+        </div>
+      </div>
+      <script src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
+    </body>
+  </html>
+</html>
