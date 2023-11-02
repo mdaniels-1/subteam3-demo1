@@ -1,0 +1,31 @@
+<!-- This is a practice html to test the user review component -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/reviewStyle.css">
+    <title>Web Component</title>
+
+  </head>
+  <body>
+    <div>
+        <user-review 
+            username="Jane"
+            date="date here"
+            review="This is Jane's comment"
+        ></user-review>
+
+        <user-review
+            username="myra"
+            date="date here"
+            feedback="This is John's comment"
+        ></user-review>
+
+        <review-menu></review-menu>
+            
+    </div>
+    
+    <script src="../src/components/reviewComponent.js"></script>
+  </body>
+</html>
