@@ -3,3 +3,6 @@
 
 # node_modules folder containing all dependencies (dotenv, express, mongo, etc.)
 node_modules/
+
+#PartySafari-T1 folder containing code/work that T1 worked on (used for displaying the link of functionality between T1 and T3)
+PartySafari-T1/
