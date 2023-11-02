@@ -10,6 +10,8 @@ class UserReview extends HTMLElement {
   connectedCallback() {
     this.username = this.getAttribute("username");
     this.date = this.getAttribute("date");
+    this.review = this.getAttribute("review");
+
 
     this.render();
   }
@@ -26,7 +28,7 @@ class UserReview extends HTMLElement {
         <button id="comment_menu" class="comment_menu" onclick="">⋮</a>
       </div>
       <div id="review-text-container" class="review_text_container">
-        <p>${this.review}</p>
+        <p id="review">${this.review}</p>
       </div>
     </div>
       `;

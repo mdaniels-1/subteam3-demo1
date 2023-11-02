@@ -11,7 +11,7 @@ class ReviewMenu extends HTMLElement {
     render() {
         this.innerHTML = `
         <div>
-            <p>Edit</p>
+            <p id="edit">Edit</p>
         </div>
         `;
     }
