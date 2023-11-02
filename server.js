@@ -50,6 +50,17 @@ const server = http.createServer((req, res) => {
           res.end('Error loading page');
         }
         
+    }else if (req.url === '/partyMap') { // load party map page
+        // serve html page
+        fs.readFile('./html/map.html', 'utf8', (err, data) => {
+            if (err) {
+                res.statusCode = 500;
+                res.end('Error loading HTML file');
+            } else { //update reviews page to have right content by executing reviewsPage.js script
+                res.statusCode = 200;
+                res.end(data);
+            }
+        });
     }else if (req.url.endsWith('.js')) { //execute javascript files (now <script> tags work)
       // Read the JS file
       fs.readFile(`.${req.url}`, 'utf8', (err, data) => {

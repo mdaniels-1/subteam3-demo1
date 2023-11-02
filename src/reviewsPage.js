@@ -8,7 +8,7 @@ console.log(__dirname);
 let data = [
     ["Jane", "11/1/2020", "This was fun!"],
     ["John", "1/2/2023", "Cool party"],
-    ["Myra", "3/4/2019", "Fun!"]
+    ["Dan", "3/4/2019", "Fun!"]
 ];
 
 fs.readFile(path, 'utf8', (err, htmlContent) => {
