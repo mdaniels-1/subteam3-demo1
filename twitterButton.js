@@ -21,7 +21,7 @@ function createTwitterShareButton(targetDiv) {
   twitterShareButton.setAttribute("data-text", "Come to this sick party!");
   twitterShareButton.setAttribute(
     "data-url",
-    "https://partysafari.com/party_listings?party=" + id
+    "https://partysafari.com/party_listings?partyid=" + id
   ); //Potentially just use URL of current page
   twitterShareButton.setAttribute("data-lang", "en");
   twitterShareButton.setAttribute("data-show-count", "false");

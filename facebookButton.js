@@ -27,7 +27,7 @@ function createFacebookShareButton(targetDiv) {
   targetDiv.appendChild(facebookSdkScript);
 
   //Create Facebook URL
-  let fbURL = `https://partysafari.com/party_listings?party=` + id; //Potentially just use URL of current page
+  let fbURL = `https://partysafari.com/party_listings?partyid=` + id; //Potentially just use URL of current page
 
   //Create Facebook Share Button
   const fbButton = document.createElement("a");
