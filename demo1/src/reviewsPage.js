@@ -1,0 +1,52 @@
+const fs = require('fs');
+const cheerio = require('cheerio'); //allows for me to append html elements to a specific element based on id
+const fetchReviewById = require('./../fetchReviewById.js');
+
+const path = './html/reviewsTemplate.html'; // the template page. need to look into how i can modify the current html
+console.log(__dirname);
+
+const generateReviewsPage = async () => {
+    try {
+        
+        const reviewIds = [1]
+
+        // Fetch all reviews in parallel
+        const reviewsPromises = reviewIds.map(id => fetchReviewById(id));
+        const reviews = await Promise.all(reviewsPromises);
+
+        // Read the HTML template
+        const htmlContent = await fs.readFileSync(path, 'utf8');
+
+        // Load the HTML content into Cheerio
+        const $ = cheerio.load(htmlContent);
+
+        // Insert custom elements for each review
+        reviews.forEach((review) => {
+            // Assuming each review is valid and has the expected structure
+            const customElement = `<user-review username="${review.user_id}" date="${review.review_date}" review="${review.review_text}"></user-review>`;
+            $('#customReviewsContainer').append(customElement);
+        });
+
+        // Get the modified HTML content
+        const modifiedHtmlContent = $.html();
+
+        // Output file path
+        const outputFilePath = './html/reviews.html';
+
+        // Write the modified HTML content back to the file
+        await fs.writeFile(outputFilePath, modifiedHtmlContent, 'utf8', (err) => {
+            if (err) {
+                console.error('Error writing output file:', err);
+                return;
+            }
+            console.log('Modified HTML file generated successfully!');
+        })
+
+    } catch (err) {
+        console.error('Error: ', err);
+    }
+};
+
+// Call the function to generate the page
+generateReviewsPage();
+
