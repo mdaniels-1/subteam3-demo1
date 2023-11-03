@@ -10,10 +10,11 @@ const generateReviewsPage = async () => {
         
         const reviewIds = [1]
 
-        // Fetch all reviews in parallel
+        //const review = await fetchReviewById(1);
+        //Fetch all reviews in parallel
         const reviewsPromises = reviewIds.map(id => fetchReviewById(id));
         const reviews = await Promise.all(reviewsPromises);
-
+        
         // Read the HTML template
         const htmlContent = await fs.readFileSync(path, 'utf8');
 
@@ -22,8 +23,7 @@ const generateReviewsPage = async () => {
 
         // Insert custom elements for each review
         reviews.forEach((review) => {
-            // Assuming each review is valid and has the expected structure
-            const customElement = `<user-review username="${review.user_id}" date="${review.review_date}" review="${review.review_text}"></user-review>`;
+            const customElement = `<user-review user-id="${review.user_id}" review-date="${review.review_date}" review-text="${review.review_text}"></user-review>`;
             $('#customReviewsContainer').append(customElement);
         });
 
