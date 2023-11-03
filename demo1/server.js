@@ -102,7 +102,7 @@ const server = http.createServer( async (req, res) => {
       // Extract the review_id from the URL
       const reviewId = parseInt(req.url.split('/').pop(), 10);
       try {
-        await client.connect();
+        //await client.connect();
         const database = client.db('dummy_db');
         const reviews = database.collection('reviews_co');
         const query = { 'review_id': reviewId };
@@ -126,7 +126,7 @@ const server = http.createServer( async (req, res) => {
           message: 'An error occurred while processing your request. Please try again later.'
         }));
       } finally {
-        await client.close();
+        //await client.close();
       }
     } else {
       // Handle 404 for other routes

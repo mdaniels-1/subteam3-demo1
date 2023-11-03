@@ -8,12 +8,18 @@ console.log(__dirname);
 const generateReviewsPage = async () => {
     try {
         
-        const reviewIds = [1]
+        // const reviewIds = [1, 2, 3]
+        // //const review = await fetchReviewById(1);
+        // //Fetch all reviews in parallel
+        // const reviewsPromises = reviewIds.map(id => fetchReviewById(id));
+        // const reviews = await Promise.all(reviewsPromises);
 
-        //const review = await fetchReviewById(1);
-        //Fetch all reviews in parallel
-        const reviewsPromises = reviewIds.map(id => fetchReviewById(id));
-        const reviews = await Promise.all(reviewsPromises);
+        const reviewIds = [1, 2, 3];
+        const reviews = [];
+        for (const id of reviewIds) {
+            const review = await fetchReviewById(id);
+            reviews.push(review);
+        }
         
         // Read the HTML template
         const htmlContent = await fs.readFileSync(path, 'utf8');
