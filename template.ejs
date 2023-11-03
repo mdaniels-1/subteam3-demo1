@@ -1161,6 +1161,7 @@
                     });
                   };
                 </script>
+
                 <script
                   async
                   defer
@@ -1168,27 +1169,20 @@
                   src="https://connect.facebook.net/en_US/sdk.js"
                 ></script>
                 <!-- Required for Twitter share button functionality-->
+                <a
+                  href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                  class="twitter-share-button"
+                  data-text="Come to this sick party!"
+                  data-url="https://partysafari.com/party_listings?party=<%= partyID %>"
+                  data-lang="en"
+                  data-show-count="false"
+                  >Tweet</a
+                >
                 <script
                   async
                   src="https://platform.twitter.com/widgets.js"
                   charset="utf-8"
                 ></script>
-                <!--Share to Twitter with pre-populated post-->
-                <script>
-                  //Define the tweet text
-                  let tweetText =
-                    "Hello World, this is a test to see how to tweet! See party details here:"; //Pull information from party_listings data
-
-                  //URL to share to Twitter from the database (Twitter auto shortens some URLs, maybe use a URL shortener?)
-                  let tweetURL = `https://twitter.com/intent/tweet?text=${tweetText}&url=https://partysafari.com/party_listings?party=${"<%= partyID %>"}`; //ID from party_listings data
-
-                  //Twitter share button
-                  const tweetButton = document.createElement("a");
-                  tweetButton.setAttribute("href", tweetURL);
-                  tweetButton.setAttribute("class", "twitter-share-button");
-                  tweetButton.setAttribute("data-size", "large");
-                  document.body.appendChild(tweetButton);
-                </script>
 
                 <!--Share to Facebook with pre-populated post-->
                 <script>
