@@ -14,7 +14,7 @@ const generateReviewsPage = async () => {
         // const reviewsPromises = reviewIds.map(id => fetchReviewById(id));
         // const reviews = await Promise.all(reviewsPromises);
 
-        const reviewIds = [1, 2, 3, 4, 5];
+        const reviewIds = [5];
         const reviews = [];
         for (const id of reviewIds) {
             const review = await fetchReviewById(id);
