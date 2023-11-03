@@ -5,6 +5,7 @@ class UserReview extends HTMLElement {
     this.username = "";
     this.date = "";
     this.review = "";
+    this.review_id = "";
 
   }
 
@@ -12,6 +13,8 @@ class UserReview extends HTMLElement {
     this.username = this.getAttribute("username");
     this.date = this.getAttribute("date");
     this.review = this.getAttribute("review");
+    this.review_id = this.getAttribute("review_id");
+
 
 
     this.render();
@@ -63,12 +66,13 @@ class UserReview extends HTMLElement {
 
       //ADD EVENT LISTENERS FOR MENU
       const content = this.querySelector('#review'); // this is the text content of the review
+      let originalText = content.textContent;
       const modifyingButtons = this.querySelector('#modify-buttons');
       const saveButton = this.querySelector('#save');
       const cancelButton = this.querySelector('#cancel');
 
 
-      //EDIT
+      //EDIT REVIEW
       const editButton = this.querySelector('#edit');
       editButton.addEventListener('click', () => {
         console.log("edit");
@@ -78,12 +82,12 @@ class UserReview extends HTMLElement {
         menu.style.display = "none";
         elipsisButton.style.display = "none";
 
-        content.parentElement.style.border = "2px solid black"; // creates border for text area
+        content.parentElement.style.border = "2px solid blue"; // creates border for text area
         content.contentEditable = true;
 
       });
 
-      // DELETE
+      // DELETE REVIEW
       const deleteButton = this.querySelector('#delete');
       deleteButton.addEventListener('click', () => {
         console.log("delete");
@@ -92,13 +96,28 @@ class UserReview extends HTMLElement {
 
       });
 
-      // SAVE
+      // SAVE EDIT
       saveButton.addEventListener('click', () => {
+        console.log(content.textContent);
+        console.log('original: ', originalText);
+        originalText = content.textContent;
+        content.contentEditable = false; // stop edits
+
+        // reset display of buttons
+        elipsisButton.style.display = "flex";
+        modifyingButtons.style.display = "none";
+
+        //send request to server
+      });
+
+      // CANCEL EDIT
+      cancelButton.addEventListener('click', () => {
+        content.textContent = originalText;
         console.log(content.textContent);
         content.contentEditable = false; // stop edits
 
         // reset display of buttons
-        elipsisButton.style.display = "none";
+        elipsisButton.style.display = "flex";
         modifyingButtons.style.display = "none";
       });
 

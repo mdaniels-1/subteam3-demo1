@@ -6,9 +6,9 @@ console.log(__dirname);
 
 
 let data = [
-    ["Jane", "11/1/2020", "This was fun!"],
-    ["John", "1/2/2023", "Cool party"],
-    ["Myra", "3/4/2019", "There were so many people!"]
+    [1, "Jane", "11/1/2020", "This was fun!"],
+    [2, "John", "1/2/2023", "Cool party"],
+    [3, "Myra", "3/4/2019", "There were so many people!"]
 ];
 
 fs.readFile(path, 'utf8', (err, htmlContent) => {
@@ -25,7 +25,7 @@ fs.readFile(path, 'utf8', (err, htmlContent) => {
 
     // Insert custom elements using the desired logic
     for (let i = 0; i < data.length; i++) {
-        const customElement = `<user-review username="${data[i][0]}" date="${data[i][1]}" review="${data[i][2]}"></user-review>`;
+        const customElement = `<user-review review_id="$data[i][0]" username="${data[i][1]}" date="${data[i][2]}" review="${data[i][3]}"></user-review>`;
         $('#customReviewsContainer').append(customElement);
     }
 
