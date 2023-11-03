@@ -55,17 +55,17 @@
 <body>
 
     <div class="container">
-        <h2>Fetch User Information</h2>
+        <h2>Fetch Review Information</h2>
         <div>
-            <input type="text" id="fetchUsername" placeholder="Enter username">
-            <button onclick="fetchUserInfo()">Get User Info</button>
+            <input type="number" id="fetchReview" placeholder="Enter review_id">
+            <button onclick="fetchReview()">Get Review Info</button>
         </div>
     
-        <div id="userInfoDisplay" style="margin-top: 20px;">
-            <h2>User Information</h2>
-            <p>Email: <span id="displayEmail"></span></p>
-            <p>Age: <span id="displayAge"></span></p>
-            <p>Phone Number: <span id="displayPhone"></span></p>
+        <div id="reviewDisplay" style="margin-top: 20px;">
+            <h2>Review Post</h2>
+            <p>User: <span id="displayUser"></span></p>
+            <p>Date: <span id="displayDate"></span></p>
+            <p>Review Text: <span id="displayReviewText"></span></p>
         </div>
     
         <form id="userForm" style="margin-top: 20px;">

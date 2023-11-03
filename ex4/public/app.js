@@ -1,49 +1,70 @@
-async function fetchUserInfo() {
-    const username = document.getElementById('fetchUsername').value;
-    const apiUrl = `http://localhost:8000/api/userinfo?username=${username}`;
+async function fetchReview() {
+    const reviewId = document.getElementById('fetchReview').value;
+    const apiUrl = `http://localhost:8000/api/reviews/${reviewId}`;
     
     try {
         const response = await fetch(apiUrl);
         
         if (!response.ok) {
-            throw new Error('Failed to fetch user information');
+            throw new Error('Failed to fetch review information');
         }
 
         const data = await response.json();
-        document.getElementById('displayEmail').textContent = data.email || 'N/A';
-        document.getElementById('displayAge').textContent = data.age || 'N/A';
-        document.getElementById('displayPhone').textContent = data.phone || 'N/A';
+        document.getElementById('displayUser').textContent = data.user_id || 'N/A';
+        document.getElementById('displayDate').textContent = data.review_date || 'N/A';
+        document.getElementById('displayReviewText').textContent = data.review_text || 'N/A';
 
     } catch (error) {
         alert(error.message);
     }
 }
 
-async function submitNewUser() {
-    const username = document.getElementById('inputUsername').value;
-    const age = parseInt(document.getElementById('inputAge').value);
-    const email = document.getElementById('inputEmail').value;
-    const phone = document.getElementById('inputPhone').value;
+// async function fetchUserInfo() {
+//     const username = document.getElementById('fetchUsername').value;
+//     const apiUrl = `http://localhost:8000/api/userinfo?username=${username}`;
+    
+//     try {
+//         const response = await fetch(apiUrl);
+        
+//         if (!response.ok) {
+//             throw new Error('Failed to fetch user information');
+//         }
 
-    const apiUrl = 'http://localhost:8000/api/adduser';
+//         const data = await response.json();
+//         document.getElementById('displayEmail').textContent = data.email || 'N/A';
+//         document.getElementById('displayAge').textContent = data.age || 'N/A';
+//         document.getElementById('displayPhone').textContent = data.phone || 'N/A';
 
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, age, email, phone })
-        });
+//     } catch (error) {
+//         alert(error.message);
+//     }
+// }
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error);
-        }
+// async function submitNewUser() {
+//     const username = document.getElementById('inputUsername').value;
+//     const age = parseInt(document.getElementById('inputAge').value);
+//     const email = document.getElementById('inputEmail').value;
+//     const phone = document.getElementById('inputPhone').value;
 
-        alert('User added successfully');
-    } catch (error) {
-        alert('Error: ${error.message}');
-    }
-}
+//     const apiUrl = 'http://localhost:8000/api/adduser';
+
+//     try {
+//         const response = await fetch(apiUrl, {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({ username, age, email, phone })
+//         });
+
+//         if (!response.ok) {
+//             const errorData = await response.json();
+//             throw new Error(errorData.error);
+//         }
+
+//         alert('User added successfully');
+//     } catch (error) {
+//         alert('Error: ${error.message}');
+//     }
+// }
 
 
 
