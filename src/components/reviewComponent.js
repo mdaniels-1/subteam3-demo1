@@ -30,11 +30,15 @@ class UserReview extends HTMLElement {
               <div id="time_of_post" class="text">${this.date}</div>
           </div>
           <button id="comment-menu" class="comment_menu" type="button">⋮</button>
-          <div id="menu-container" class="menu_container">
+          <div id="menu-container" class="menu_container" style="display: none">
               <ul id="menu" class="menu">
                   <li><button id="edit" type="button">Edit</button></li>
                   <li><button id="delete" type="button">Delete</button></li>
               </ul>
+          </div>
+          <div id="modify-buttons" style="display: none">
+              <button id="save" class="modify_button">Save</button>
+              <button id="cancel" class="modify_button">Cancel</button>
           </div>
       </div>
       <div id="review-text-container" class="review_text_container">
@@ -50,31 +54,53 @@ class UserReview extends HTMLElement {
       document.body.appendChild(script);
 
       // create script/event listener that will toggle menu on button click
-      const button = this.querySelector('#comment-menu');
+      const elipsisButton = this.querySelector('#comment-menu');
       const menu = this.querySelector('#menu-container');
-      button.addEventListener('click', () => {
+      elipsisButton.addEventListener('click', () => {
         menu.style.display = (menu.style.display === 'none') ? 'flex' : 'none';
 
       });
 
       //ADD EVENT LISTENERS FOR MENU
       const content = this.querySelector('#review'); // this is the text content of the review
+      const modifyingButtons = this.querySelector('#modify-buttons');
+      const saveButton = this.querySelector('#save');
+      const cancelButton = this.querySelector('#cancel');
+
 
       //EDIT
       const editButton = this.querySelector('#edit');
       editButton.addEventListener('click', () => {
         console.log("edit");
-        // button.disabled = false;
+
+        // set up for review changing
+        modifyingButtons.style.display = "flex";
+        menu.style.display = "none";
+        elipsisButton.style.display = "none";
+
+        content.parentElement.style.border = "2px solid black"; // creates border for text area
+        content.contentEditable = true;
+
       });
 
       // DELETE
       const deleteButton = this.querySelector('#delete');
       deleteButton.addEventListener('click', () => {
         console.log("delete");
+        menu.style.display = "none";
         // button.disabled = false;
 
       });
 
+      // SAVE
+      saveButton.addEventListener('click', () => {
+        console.log(content.textContent);
+        content.contentEditable = false; // stop edits
+
+        // reset display of buttons
+        elipsisButton.style.display = "none";
+        modifyingButtons.style.display = "none";
+      });
 
     
   }

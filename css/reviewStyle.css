@@ -7,6 +7,8 @@
     --green: #baf26f;
     --darkened-green: #99eb2d;
     --almost-white: rgb(226, 226, 226);
+    --darkened-almost-white: rgb(182, 182, 182);
+
 }
 
 body{
@@ -28,10 +30,51 @@ body{
     background-color: var(--darkened-orange);
 }
 
+.modify_button{
+    background-color: var(--almost-white);
+    border: none;
+    color:black;
+    display: block;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin: 5px;
+    text-align: center;
+}
+
+.modify_button:hover{
+    background-color: var(--darkened-almost-white);
+}
+
+.pfp{
+	border-radius: 100px;
+	margin-right: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.profile_container{
+	margin-left: auto;
+	margin-right: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;   
+
+}
+
 .review_text_container{
     background-color: rgb(222, 221, 221);
     padding: 5px;
     margin-top: 10px;
+}
+
+.review_user_data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    width: 95%;
 }
 
 .text{
@@ -49,37 +92,3 @@ body{
 
 
 }
-
-.review_user_data{
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    width: 95%;
-}
-
-
-.profile_container{
-	margin-left: auto;
-	margin-right: auto;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;   
-
-}
-
-.pfp{
-	border-radius: 100px;
-	margin-right: 20px;
-    margin-left: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-/* This is for the editing menu */
-/* #modify-menu{
-    transform: translate(-80%, 70%);
-}
-
-.show_menu{
-    transform: translate(-50%);
-} */
