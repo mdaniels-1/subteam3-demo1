@@ -1,5 +1,5 @@
 async function fetchReviewById(reviewId) {
-  const apiUrl = `http://localhost:8080/api/reviews/${reviewId}`;
+  const apiUrl = `http://localhost:8080/api/getreview/${reviewId}`;
   
   try {
       const response = await fetch(apiUrl);

@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const cheerio = require('cheerio'); //allows for me to append html elements to a specific element based on id
 const fetchReviewById = require('./../fetchReviewById.js');
 
@@ -14,7 +14,7 @@ const generateReviewsPage = async () => {
         // const reviewsPromises = reviewIds.map(id => fetchReviewById(id));
         // const reviews = await Promise.all(reviewsPromises);
 
-        const reviewIds = [1, 2, 3];
+        const reviewIds = [1, 2, 3, 4, 5];
         const reviews = [];
         for (const id of reviewIds) {
             const review = await fetchReviewById(id);
@@ -22,7 +22,7 @@ const generateReviewsPage = async () => {
         }
         
         // Read the HTML template
-        const htmlContent = await fs.readFileSync(path, 'utf8');
+        const htmlContent = await fs.readFile(path, 'utf8');
 
         // Load the HTML content into Cheerio
         const $ = cheerio.load(htmlContent);
@@ -40,13 +40,9 @@ const generateReviewsPage = async () => {
         const outputFilePath = './html/reviews.html';
 
         // Write the modified HTML content back to the file
-        await fs.writeFile(outputFilePath, modifiedHtmlContent, 'utf8', (err) => {
-            if (err) {
-                console.error('Error writing output file:', err);
-                return;
-            }
-            console.log('Modified HTML file generated successfully!');
-        })
+        await fs.writeFile(outputFilePath, modifiedHtmlContent, 'utf8')
+
+        console.log('Modified HTML file generated successfully!');
 
     } catch (err) {
         console.error('Error: ', err);

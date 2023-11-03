@@ -98,11 +98,11 @@ const server = http.createServer( async (req, res) => {
           res.end(data);
         }
       });
-    } else if (req.url.startsWith('/api/reviews/')) {
+    } else if (req.method === 'GET' && req.url.startsWith('/api/getreview/')) {
       // Extract the review_id from the URL
       const reviewId = parseInt(req.url.split('/').pop(), 10);
       try {
-        //await client.connect();
+        await client.connect();
         const database = client.db('dummy_db');
         const reviews = database.collection('reviews_co');
         const query = { 'review_id': reviewId };
@@ -126,7 +126,30 @@ const server = http.createServer( async (req, res) => {
           message: 'An error occurred while processing your request. Please try again later.'
         }));
       } finally {
-        //await client.close();
+        await client.close();
+      }
+    } else if (req.method === 'DELETE' && req.url.startsWith('/api/deletereview/')) {
+      // Extract the review_id from the URL
+      const reviewId = parseInt(req.url.split('/').pop(), 10);
+      try {
+        await client.connect();
+        const database = client.db('dummy_db');
+        const reviews = database.collection('reviews_co');
+        const query = { 'review_id': reviewId };
+        const result = await reviews.deleteOne(query);
+    
+        if (result.deletedCount === 1) {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ message: `Review with ID ${reviewId} deleted successfully.` }));
+        } else {
+          res.writeHead(404, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Review not found', reviewIdRequested: reviewId }));
+        }
+      } catch (error) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Internal Server Error', message: error.message }));
+      } finally {
+        await client.close();
       }
     } else {
       // Handle 404 for other routes
