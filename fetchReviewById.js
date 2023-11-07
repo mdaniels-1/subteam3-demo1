@@ -16,4 +16,4 @@ async function fetchReviewById(reviewId) {
   }
 }
 
-  module.exports = fetchReviewById;
+module.exports = fetchReviewById;
