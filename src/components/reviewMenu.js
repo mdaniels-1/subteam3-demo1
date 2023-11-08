@@ -10,13 +10,6 @@ class ReviewMenu extends HTMLElement {
   
     render() {
         this.innerHTML = `
-<<<<<<< HEAD
-        <div>
-            <p id="edit">Edit</p>
-        </div>
-        `;
-    }
-=======
         <div id="menu-container" class="menu_container">
             <ul id="menu" class="menu">
               <li><button id="edit" type="button">Edit</button></li>
@@ -36,7 +29,6 @@ class ReviewMenu extends HTMLElement {
     }
 
 
->>>>>>> origin/main
   }
   
   customElements.define("review-menu", ReviewMenu);
