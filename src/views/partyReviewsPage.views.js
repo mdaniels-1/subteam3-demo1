@@ -19,7 +19,8 @@ const servePage = async (req, res) => {
         }
 
         // Read the HTML template
-        const htmlContent = await fs.readFile('./../html/reviewsTemplate.html', 'utf8');
+        const templatePath = path.join(__dirname, '../../html/reviewsTemplate.html');
+        const htmlContent = await fs.readFile(templatePath, 'utf8');
 
         // Load the HTML content into Cheerio
         const $ = cheerio.load(htmlContent);
