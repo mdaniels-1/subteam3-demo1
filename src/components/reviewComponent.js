@@ -2,18 +2,16 @@ class UserReview extends HTMLElement {
   constructor() {
     super();
 
-    this.username = "";
-    this.date = "";
-    this.review = "";
-    this.review_id = "";
+    this.user_id = "";
+    this.review_date = "";
+    this.review_text = "";
 
   }
 
   connectedCallback() {
-    this.username = this.getAttribute("username");
-    this.date = this.getAttribute("date");
-    this.review = this.getAttribute("review");
-    this.review_id = this.getAttribute("review_id");
+    this.user_id = this.getAttribute("user-id");
+    this.review_date = this.getAttribute("review-date");
+    this.review_text = this.getAttribute("review-text");
 
 
 
@@ -29,8 +27,8 @@ class UserReview extends HTMLElement {
       <div id="profile-container" class="profile_container">
           <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" loading="lazy" width="52" id="profile_picture" alt="" class="pfp">
           <div id="review_user_data" class="review_user_data">
-              <div id="username" class="text">${this.username}</div>
-              <div id="time_of_post" class="text">${this.date}</div>
+              <div id="user-id" class="text">${this.user_id}</div>
+              <div id="review-date" class="text">${this.review_date}</div>
           </div>
           <button id="comment-menu" class="comment_menu" type="button">⋮</button>
           <div id="menu-container" class="menu_container" style="display: none">
@@ -45,16 +43,16 @@ class UserReview extends HTMLElement {
           </div>
       </div>
       <div id="review-text-container" class="review_text_container">
-          <p id="review" class="text" contenteditable="false">${this.review}</p>
+          <p id="review-text" class="text" contenteditable="false">${this.review_text}</p>
       </div>
     </div>
 
       `;
 
       //give access to custom menu object (via script insert)
-      // const script = document.createElement('script');
-      // script.src = '../src/reviewMenu.js';
-      // document.body.appendChild(script);
+      const script = document.createElement('script');
+      script.src = '../src/reviewMenu.js';
+      document.body.appendChild(script);
 
       // create script/event listener that will toggle menu on button click
       const elipsisButton = this.querySelector('#comment-menu');

@@ -20,15 +20,15 @@
     color: var(--orange);
     letter-spacing: 3px;
     text-align: center;
-    font-size: 40px;
+    font-size: 26px;
     font-weight: bold;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .slogan{
     padding: 10px;
-    margin-top: 20px;
-    color: #6cd7f4;
+    margin-top: 15px;
+    color: var(--green);
     letter-spacing: 2px;
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

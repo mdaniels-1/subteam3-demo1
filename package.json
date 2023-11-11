@@ -1,26 +1,12 @@
 {
-  "name": "subteam3-demo1",
+  "name": "ex5",
   "version": "1.0.0",
-  "description": "Temporary repository for subteam 3 for demo 1. Things will be moved to official party safari repo at later date",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mdaniels-1/subteam3-demo1.git"
-  },
+  "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mdaniels-1/subteam3-demo1/issues"
-  },
-  "homepage": "https://github.com/mdaniels-1/subteam3-demo1#readme",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "mongodb": "^6.2.0"
-  }
+  "license": "ISC"
 }
