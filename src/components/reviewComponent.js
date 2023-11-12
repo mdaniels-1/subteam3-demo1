@@ -63,7 +63,7 @@ class UserReview extends HTMLElement {
       });
 
       //ADD EVENT LISTENERS FOR MENU
-      const content = this.querySelector('#review'); // this is the text content of the review
+      const content = this.querySelector('#review-text'); // this is the text content of the review
       let originalText = content.textContent;
       const modifyingButtons = this.querySelector('#modify-buttons');
       const saveButton = this.querySelector('#save');
