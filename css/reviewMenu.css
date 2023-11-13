@@ -55,6 +55,6 @@
 }
 
 .menu_container li button:hover {
-    background-color: var(--blue);
-    color: black;
+    background-color: var(--bg-darkened);
+    color: var(--almost-white)
 }
