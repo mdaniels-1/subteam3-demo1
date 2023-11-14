@@ -8,13 +8,19 @@ class UserReview extends HTMLElement {
 
   }
 
-  connectedCallback() {
-    this.user_id = this.getAttribute("user-id");
-    this.review_date = this.getAttribute("review-date");
-    this.review_text = this.getAttribute("review-text");
+  // connectedCallback() {
+  //   this.user_id = this.getAttribute("user-id");
+  //   this.review_date = this.getAttribute("review-date");
+  //   this.review_text = this.getAttribute("review-text");
+  //   this.render();
+  // }
 
-
-
+  async connectedCallback() {
+    // review ID must be passed as an attribute to the custom element
+    const reviewID = this.getAttribute("review-id");
+    if (reviewID) {
+      await this.fetchReviewInfo(reviewID);
+    }
     this.render();
   }
 

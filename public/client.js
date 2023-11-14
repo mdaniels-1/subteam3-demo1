@@ -1,6 +1,6 @@
-async function fetchReviewInfo() {
-    const username = document.getElementById('fetchReview').value;
-    const apiUrl = `http://localhost:8080/api/reviews/getreview?username=${username}`;
+async function fetchReviewInfo(reviewID) {
+    //const username = document.getElementById('reviewID').value;
+    const apiUrl = `http://localhost:8080/api/reviews/getreview?_id=${reviewID}`;
     
     try {
         const response = await fetch(apiUrl);
