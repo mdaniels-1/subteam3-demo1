@@ -19,7 +19,7 @@ const server = http.createServer((req, res) => {
         servePartyReviewsPage(req, res);
     } else if (pathname.endsWith('.js') || pathname.endsWith('.css')) {
         serveStaticFile(req, res);
-    } else if (pathname.startsWith('/api/getreview')) {
+    } else if (pathname.startsWith('/api/reviews')) {
         handleReviewRequests(req, res);
     } else {
         res.writeHead(404);

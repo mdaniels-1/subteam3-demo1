@@ -1,4 +1,4 @@
-// partyReviewsPage.controller.js
+// partyReviewsPage.views.js
 
 const { ObjectId } = require('mongodb');
 const path = require('path'); 
@@ -19,7 +19,7 @@ const servePage = async (req, res) => {
         }
 
         // Read the HTML template
-        const templatePath = path.join(__dirname, '../../html/reviewsTemplate.html');
+        const templatePath = path.join(__dirname, '../../public/html/reviewsTemplate.html');
         const htmlContent = await fs.readFile(templatePath, 'utf8');
 
         // Load the HTML content into Cheerio
