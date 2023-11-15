@@ -1,6 +1,4 @@
-
-
-  // Inserting sample data
+// Inserting sample data
   db.parties_co.insertMany([
     {
         Name: 'Easton Ave Halloween Post Party',
