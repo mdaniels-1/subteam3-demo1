@@ -1,11 +1,11 @@
+
+
 class UserReview extends HTMLElement {
   constructor() {
     super();
-
     this.user_id = "";
     this.review_date = "";
     this.review_text = "";
-
   }
 
   // connectedCallback() {
@@ -14,7 +14,28 @@ class UserReview extends HTMLElement {
   //   this.review_text = this.getAttribute("review-text");
   //   this.render();
   // }
-
+  
+  async fetchReviewInfo(review_id) {
+    //const username = document.getElementById('reviewID').value;
+    const apiUrl = `http://localhost:8080/api/reviews/getreview?_id=${review_id}`;
+    
+    try {
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch review information');
+        }
+  
+        const data = await response.json();
+        document.getElementById('displayUserID').textContent = data.user_id || 'N/A';
+        document.getElementById('displayReviewDate').textContent = data.review_date || 'N/A';
+        document.getElementById('displayReviewText').textContent = data.review_text || 'N/A';
+  
+    } catch (error) {
+        alert(error.message);
+    }
+  }
+  
   async connectedCallback() {
     // review ID must be passed as an attribute to the custom element
     const reviewID = this.getAttribute("review-id");
@@ -23,6 +44,7 @@ class UserReview extends HTMLElement {
     }
     this.render();
   }
+  
 
   render() {
 
