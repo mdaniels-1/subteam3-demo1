@@ -45,24 +45,3 @@ exports.getReviewDetails = async (req, res, review_id) => {
     res.end(JSON.stringify({ error: "Internal Server Error" }));
   }
 };
-
-exports.getReviewsForDisplay = async (review_id) => {
-  if (!review_id) {
-    throw new Error("review_id parameter is missing");
-  }
-
-  try {
-    const review = await partyReviewsCollection.findOne({
-      _id: new ObjectId(review_id),
-    });
-
-    if (!review) {
-      throw new Error("Review not found");
-    }
-    return review; // Return the review object
-  } catch (error) {
-    // Handle error
-    console.error(error);
-    throw error;
-  }
-}
