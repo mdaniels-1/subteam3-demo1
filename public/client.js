@@ -10,9 +10,6 @@ function fetchReviewDetails(reviewId) {
         return response.json();
       })
       .then(data => {
-        // Here you would use the data to populate your custom element or another part of your page
-        //console.log(data);
-        // For example, if you had a div with an id of 'review-container' where you want to display the review
         const reviewContainer = document.getElementById('customReviewsContainer');
         const userReview = document.createElement('user-review');
         userReview.setAttribute('user-id', data.user_id);
