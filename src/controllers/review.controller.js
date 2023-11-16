@@ -1,4 +1,20 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
+const path = require("path");
+
+// Debug: Log the expected path of the .env file
+const envPath = path.resolve(process.cwd(), '.env');
+console.log(`Looking for .env file at: ${envPath}`);
+
+// Attempt to load the .env file
+const result = dotenv.config();
+
+// Debug: Log the result of dotenv.config()
+if (result.error) {
+  console.error('Error loading .env file', result.error);
+} else {
+  console.log('.env file loaded successfully');
+}
+
 const { ObjectId } = require("mongodb");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_USER_PASSWORD}@atlascluster.bvzvel0.mongodb.net/?retryWrites=true&w=majority`;
@@ -9,6 +25,7 @@ const mongoClient = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
+
 let partyReviewsCollection;
 
 // Connect to MongoDB and set up collections for use
