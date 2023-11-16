@@ -60,12 +60,11 @@ This project follows the given directory structure with various components organ
 
 ### `/src`: The server-side codebase including the MVC (Model-View-Controller) architecture.
 
-- `/controllers`: Contains controllers that handle input and convert it to commands for the model or view.
-  - `review.controller.js`: Manages the business logic related to reviews.
+- `/controllers`: Contains controllers that handle direct interactions with the mongodb.
 - `/model`: Represents the application's data structures.
   - `xxx_co.js`: mongosh script to create the xxx collection
   - `xxx_dummies.js`: mongosh script to populate the xxx collection with example data entries
-- `/routes`: Defines the URL endpoints and their corresponding logic.
+- `/routes`: Routes requests to the right controllers.
 - `server.js`: The main entry point for the Node.js server.
 - `/views`: Server-side templates and views.
   - `landingPage.views.js`: Serves the landing page view.
