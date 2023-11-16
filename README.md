@@ -1,34 +1,42 @@
 # Project Structure
 
 This project follows the given directory structure with various components organized into specific folders:
-8 directories, 23 file
 ```
 .
 ├── README.md
-├── components
-├── css
-│   ├── footer.css
-│   ├── landingPage.css
-│   ├── navigation.css
-│   ├── reviewMenu.css
-│   └── reviewStyle.css
-├── html
-│   ├── landingPage.html
-│   ├── map.html
-│   ├── reviewsTemplate.html
-│   └── test.html
 ├── package-lock.json
 ├── package.json
+├── public
+│   ├── client.js
+│   ├── components
+│   │   ├── footer.js
+│   │   ├── navigation.js
+│   │   ├── reviewComponent.js
+│   │   └── reviewMenu.js
+│   ├── css
+│   │   ├── footer.css
+│   │   ├── landingPage.css
+│   │   ├── navigation.css
+│   │   ├── reviewMenu.css
+│   │   └── reviewStyle.css
+│   └── html
+│       ├── landingPage.html
+│       ├── map.html
+│       ├── reviewsTemplate.html
+│       └── test.html
 └── src
-    ├── components
-    │   ├── footer.js
-    │   ├── navigation.js
-    │   ├── reviewComponent.js
-    │   └── reviewMenu.js
     ├── controllers
-    │   └── review.controller.js
+    │   └── review.controller.js
+    ├── model
+    │   ├── notes.txt
+    │   ├── parties_co.js
+    │   ├── parties_dummies.js
+    │   ├── reviews_co.js
+    │   ├── reviews_dummies.js
+    │   ├── users_co.js
+    │   └── users_dummies.js
     ├── routes
-    │   └── review.routes.js
+    │   └── review.routes.js
     ├── server.js
     └── views
         ├── landingPage.views.js
@@ -37,19 +45,40 @@ This project follows the given directory structure with various components organ
         └── staticFile.views.js
 ```
 
-## src Directory Details
+## Directories and Files
 
-- `/src/views`: Functions that dynamically generate HTML files to serve to the user.
-- `/src/components`: Helper functions used by the `.views` files.
-- `/src/controllers`: API controllers that interact with the MongoDB.
-- `/src/routes`: Functions that route URLs to views or request handlers.
-- `/src/server.js`: The entry point of the server.
+- `README.md`: The introductory documentation for the project, including setup instructions and other essential information.
+- `package-lock.json`: Automatically generated file for any operations where npm modifies either the node_modules tree or `package.json`.
+- `package.json`: Lists the packages your project depends on and provides information about the project (like its version).
 
-## Static Files
+### `/public`: Contains the client-facing codebase.
 
-- `/html` and `/css`: Files served to the user.
+- `client.js`: Handles client-side API calls.
+- `/components`: Modular JavaScript files for different components of the application.
+- `/css`: Styling files for the client-side application.
+- `/html`: HTML templates and pages for the application.
 
-## TODO
+### `/src`: The server-side codebase including the MVC (Model-View-Controller) architecture.
 
-1. Currently, the `.views` files fetch data from the MongoDB to print onto the HTML files and THEN serve it to the user. We might want to instead print the API call into the HTML, serve it to the user, then the client-side code calls the API to fetch from the database.
-2. I still don't know how to organize the CSS/HTML directories. Maybe we should organize files into `/src` and `/public`?
+- `/controllers`: Contains controllers that handle input and convert it to commands for the model or view.
+  - `review.controller.js`: Manages the business logic related to reviews.
+- `/model`: Represents the application's data structures.
+  - `xxx_co.js`: mongosh script to create the xxx collection
+  - `xxx_dummies.js`: mongosh script to populate the xxx collection with example data entries
+- `/routes`: Defines the URL endpoints and their corresponding logic.
+- `server.js`: The main entry point for the Node.js server.
+- `/views`: Server-side templates and views.
+  - `landingPage.views.js`: Serves the landing page view.
+  - `partyMapPage.views.js`: WIP.
+  - `partyReviewsPage.views.js`: Serves the reviews page to the user.
+  - `staticFile.views.js`: Helper functions for serving static files.
+
+## Additional Information
+
+- Make sure you have your .env file configured like so:
+    ```
+    MONGO_API_KEY=""
+    MONGO_USER=""
+    MONGO_USER_PASSWORD=""
+    ```
+- Make sure you have the necessary node dependencies. Rebuild your package with `npm ci` if needed.
