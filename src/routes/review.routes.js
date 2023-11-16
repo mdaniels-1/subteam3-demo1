@@ -24,7 +24,7 @@ function handleRequest(req, res) {
       req,
       res,
       parsedUrl.searchParams.get("party_id"),
-      parsedUrl.searchParams.get("N")
+      parseInt(parsedUrl.searchParams.get("N"), 10)
     );
   }
 }

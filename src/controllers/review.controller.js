@@ -26,14 +26,14 @@ const mongoClient = new MongoClient(uri, {
   },
 });
 
-let partyReviewsCollection;
+let reviewsCollection;
 let usersCollection;
 let partiesCollection;
 
 // Connect to MongoDB and set up collections for use
 exports.dbConnect = async () => {
   const db = mongoClient.db("dummy_db");
-  partyReviewsCollection = db.collection("reviews_co");
+  reviewsCollection = db.collection("reviews_co");
   usersCollection = db.collection("users_co");
   partiesCollection = db.collection("parties_co");
 };
@@ -48,7 +48,7 @@ exports.getOneReviewByID = async (req, res, review_id) => {
 
   try {
     // Fetch the review details using the provided 'review_id'
-    const review = await partyReviewsCollection.findOne({
+    const review = await reviewsCollection.findOne({
       _id: new ObjectId(review_id),
     });
 
@@ -104,11 +104,11 @@ exports.getNLatestReviewsOfParty = async (req, res, party_id, N) => {
           foreignField: "_id",                              // Field from the users collection
           as: "user_info"                                   // Result as user_info
       }},
-      { $lookup: {                                         // Lookup to add party title
-          from: "parties_co",                              // Collection to join with
-          localField: "party_id",                          // Field from the reviews collection
+      { $lookup: {                                          // Lookup to add party title
+          from: "parties_co",                               // Collection to join with
+          localField: "party_id",                           // Field from the reviews collection
           foreignField: "_id",                              // Field from the parties collection
-          as: "party_info"                                 // Result as party_info
+          as: "party_info"                                  // Result as party_info
       }},
       { $unwind: "$user_info" },                           // Unwind the results
       { $unwind: "$party_info" },                          // Unwind the results

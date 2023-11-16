@@ -46,9 +46,9 @@ function fetchNLatestReviewsOfParty(partyID, num) {
         
         // Assuming the review object contains 'username', 'party_title', and 'review_id'
         reviewElement.innerHTML = `
-          <h3>${data.party_info.party_title}</h3>
-          <p>Review by ${data.user_info.username}</p>
-          <p>Review ID: ${data.review_text}</p>
+          <h3>${review.party_info.party_title}</h3>
+          <p>Review by ${review.user_info.username}</p>
+          <p>Review ID: ${review.review_text}</p>
           // Add more details from the review as needed
         `;
 
