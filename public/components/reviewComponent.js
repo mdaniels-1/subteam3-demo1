@@ -1,13 +1,13 @@
 class UserReview extends HTMLElement {
   constructor() {
     super();
-    this.user_id = "";
+    this.user_info.username = "";
     this.review_date = "";
     this.review_text = "";
   }
 
   connectedCallback() {
-    this.user_id = this.getAttribute("user-id");
+    this.user_info.username = this.getAttribute("username");
     this.review_date = this.getAttribute("review-date");
     this.review_text = this.getAttribute("review-text");
     this.render();
@@ -22,7 +22,7 @@ class UserReview extends HTMLElement {
       <div id="profile-container" class="profile_container">
           <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" loading="lazy" width="52" id="profile_picture" alt="" class="pfp">
           <div id="review_user_data" class="review_user_data">
-              <div id="user-id" class="text">${this.user_id}</div>
+              <div id="username" class="text">${this.user_info.username}</div>
               <div id="review-date" class="text">${this.review_date}</div>
           </div>
           <button id="comment-menu" class="comment_menu" type="button">⋮</button>

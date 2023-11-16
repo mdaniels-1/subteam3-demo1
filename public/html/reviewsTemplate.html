@@ -15,7 +15,7 @@
   </head>
   <body>
     <nav-bar></nav-bar>
-    <div id="customReviewsContainer">
+    <div id="reviews-container">
       <!-- Custom elements (user reviews) will be inserted here -->
     </div>
 
@@ -27,9 +27,10 @@
 
     <script>
       window.onload = () => {
-        fetchReviewDetails('65542251aa8c03ba44c3858f');
-        fetchReviewDetails('65542251aa8c03ba44c38590');
-        fetchReviewDetails('65542251aa8c03ba44c38591');
+        fetchNLatestReviewsOfParty('65541e4faa8c03ba44c38589', 5);
+        // fetchReviewDetails('65566a1ced7efb4f850e7491');
+        // fetchReviewDetails('65566a1ced7efb4f850e7495');
+        // fetchReviewDetails('65566a1ced7efb4f850e7494');
       };
     </script>
 
