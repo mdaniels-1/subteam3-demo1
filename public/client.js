@@ -1,5 +1,5 @@
 function fetchReviewDetails(reviewId) {
-  const url = new URL('/api/reviews/get-one-review', 'http://localhost:8080');
+  const url = new URL('/api/reviews/get-one', 'http://localhost:8080');
   url.searchParams.append('review_id', reviewId);
 
   fetch(url)
@@ -23,7 +23,7 @@ function fetchReviewDetails(reviewId) {
 }
 
 function fetchNLatestReviewsOfParty(partyID, num) {
-  const url = new URL('/api/reviews/get-latest-reviews', 'http://localhost:8080');
+  const url = new URL('/api/reviews/get-latest-n', 'http://localhost:8080');
   url.searchParams.append('party_id', partyID);
   url.searchParams.append('N', num);
 

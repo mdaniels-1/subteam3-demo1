@@ -75,6 +75,8 @@ exports.getNLatestReviewsOfParty = async (req, res, party_id, N) => {
     return res.end(JSON.stringify({ error: "party_id parameter is missing" }));
   }
 
+  console.log('getNLatestReviewsOfParty: ', party_id, N);
+
   // Validate the presence of the 'N' parameter. N is the number of reviews to return.
   if (!N) {
     res.writeHead(400, { "Content-Type": "application/json" });
