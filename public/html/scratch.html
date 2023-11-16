@@ -1,0 +1,29 @@
+<!-- SCRATCH PAD, NOT CODE!-->
+    
+    <!-- Script to fetch and display reviews -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+          const reviewContainer = document.getElementById('customReviewsContainer');
+          const reviewIds = [
+            '65542251aa8c03ba44c3858f',
+            '65542251aa8c03ba44c38590',
+            '65542251aa8c03ba44c38591'
+          ];
+          //const reviewTemplate = document.getElementById('reviewTemplate').content;
+          
+          try {
+            const response = await fetch('/api/reviews/getreviews?review_id=${reviewIds}');
+            const reviews = await response.json();
+            
+            reviews.forEach(reviewData => {
+              const review = reviewTemplate.cloneNode(true);
+              const userReview = review.querySelector('user-review');
+              userReview.setAttribute('review-id', reviewData._id); // Assuming the review object has an _id field
+              // Set other attributes as needed...
+              reviewContainer.appendChild(review);
+            });
+          } catch (error) {
+            console.error('Failed to load reviews:', error);
+          }
+        });
+      </script>
