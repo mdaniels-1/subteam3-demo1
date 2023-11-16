@@ -1,20 +1,15 @@
 class UserReview extends HTMLElement {
   constructor() {
     super();
-
     this.user_id = "";
     this.review_date = "";
     this.review_text = "";
-
   }
 
   connectedCallback() {
     this.user_id = this.getAttribute("user-id");
     this.review_date = this.getAttribute("review-date");
     this.review_text = this.getAttribute("review-text");
-
-
-
     this.render();
   }
 

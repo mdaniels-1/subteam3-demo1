@@ -1,4 +1,4 @@
-// staticFiles.controller.js
+// staticFiles.views.js
 
 const fs = require('fs');
 const path = require('path');
@@ -12,7 +12,7 @@ function servePage (req, res) {
 
     const contentType = validExtensions[extension] || 'text/plain';
 
-    fs.readFile(path.join(__dirname, '..', '..', req.url), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, '../../public', req.url), 'utf8', (err, data) => {
         if (err) {
             res.writeHead(404, { 'Content-Type': 'text/plain' });
             res.end('Page not found');

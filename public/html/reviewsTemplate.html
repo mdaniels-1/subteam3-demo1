@@ -18,12 +18,21 @@
     <div id="customReviewsContainer">
       <!-- Custom elements (user reviews) will be inserted here -->
     </div>
-    
-    <script src="../src/components/reviewComponent.js"></script>
-    <script src="../src/components/reviewMenu.js"></script>
-    <script src="../src/views/partyReviewsPage.views.js"></script>
-    <script src="../src/components/navigation.js"></script>
-    <script src="../src/components/footer.js"></script>
+
+    <script src="../components/reviewComponent.js"></script>
+    <script src="../components/reviewMenu.js"></script>
+    <script src="../components/navigation.js"></script>
+    <script src="../components/footer.js"></script>
+    <script src="../client.js"></script>
+
+    <script>
+      window.onload = () => {
+        fetchReviewDetails('65542251aa8c03ba44c3858f');
+        fetchReviewDetails('65542251aa8c03ba44c38590');
+        fetchReviewDetails('65542251aa8c03ba44c38591');
+      };
+    </script>
+
 
 
   </body>

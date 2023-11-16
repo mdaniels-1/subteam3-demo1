@@ -5,7 +5,7 @@ function handleRequest(req, res) {
 
   const parsedUrl = new URL(req.url, "http://localhost:8080");
   if (
-    parsedUrl.pathname === "/api/getreview" &&
+    parsedUrl.pathname === "/api/reviews/getreview" &&
     req.method === "GET" &&
     parsedUrl.searchParams.has("review_id")
   ) {
