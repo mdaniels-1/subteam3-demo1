@@ -1,14 +1,36 @@
 class UserReview extends HTMLElement {
   constructor() {
     super();
-    this.user_info.username = "";
+    this.username = "";
+    this.rating = 0;
     this.review_date = "";
+    this.party_name = "";
     this.review_text = "";
   }
 
+  generateStars(rating) {
+    // The ★ character represents a filled star
+    const filledStar = '★';
+    // The ☆ character represents an unfilled star
+    const unfilledStar = '☆';
+    // Start with an empty string for the stars
+    let stars = '';
+    // Add filled stars up to the rating value
+    for (let i = 0; i < rating; i++) {
+      stars += filledStar;
+    }
+    // Fill the rest with unfilled stars up to 10
+    for (let i = rating; i < 10; i++) {
+      stars += unfilledStar;
+    }
+    return stars;
+  }
+
   connectedCallback() {
-    this.user_info.username = this.getAttribute("username");
+    this.username = this.getAttribute("username");
+    this.rating = parseInt(this.getAttribute("rating"));
     this.review_date = this.getAttribute("review-date");
+    this.party_name = this.getAttribute("party-name");
     this.review_text = this.getAttribute("review-text");
     this.render();
   }
@@ -17,32 +39,64 @@ class UserReview extends HTMLElement {
 
     // create inner html
     // NOTE: the script tag doesn't work here; it needs to be added via code
+    // NOTE: if you're using VSCode, install the innerHTML Syntax Highlighting extension
+
     this.innerHTML = `
     <div id="user-review-container" class="user_review_container">
       <div id="profile-container" class="profile_container">
-          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" loading="lazy" width="52" id="profile_picture" alt="" class="pfp">
-          <div id="review_user_data" class="review_user_data">
-              <div id="username" class="text">${this.user_info.username}</div>
-              <div id="review-date" class="text">${this.review_date}</div>
-          </div>
-          <button id="comment-menu" class="comment_menu" type="button">⋮</button>
-          <div id="menu-container" class="menu_container" style="display: none">
-              <ul id="menu" class="menu">
-                  <li><button id="edit" type="button">Edit</button></li>
-                  <li><button id="delete" type="button">Delete</button></li>
-              </ul>
-          </div>
-          <div id="modify-buttons" style="display: none">
-              <button id="save" class="modify_button">Save</button>
-              <button id="cancel" class="modify_button">Cancel</button>
-          </div>
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" loading="lazy" width="52" id="profile_picture" alt="" class="pfp">
+        <div id="review_user_data" class="review_user_data">
+          <div id="username" class="text">${this.username}</div>
+          <div id="review-date" class="text">${this.review_date}</div>
+          <div id="rating" class="rating">${this.generateStars(this.rating)}</div>
+        </div>
+        <button id="comment-menu" class="comment_menu" type="button">⋮</button>
+        <div id="menu-container" class="menu_container" style="display: none">
+          <ul id="menu" class="menu">
+            <li><button id="edit" type="button">Edit</button></li>
+            <li><button id="delete" type="button">Delete</button></li>
+          </ul>
+        </div>
+        <div id="modify-buttons" style="display: none">
+          <button id="save" class="modify_button">Save</button>
+          <button id="cancel" class="modify_button">Cancel</button>
+        </div>
+      </div>
+      <div id="party-name-container" class="party_name_container">
+        <p id="party-name" class="text">About: ${this.party_name}</p>
       </div>
       <div id="review-text-container" class="review_text_container">
-          <p id="review-text" class="text" contenteditable="false">${this.review_text}</p>
+        <p id="review-text" class="text" contenteditable="false">${this.review_text}</p>
       </div>
     </div>
+    `;
 
-      `;
+    // this.innerHTML = `
+    // <div id="user-review-container" class="user_review_container">
+    //   <div id="profile-container" class="profile_container">
+    //       <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" loading="lazy" width="52" id="profile_picture" alt="" class="pfp">
+    //       <div id="review_user_data" class="review_user_data">
+    //           <div id="username" class="text">${this.username}</div>
+    //           <div id="review-date" class="text">${this.review_date}</div>
+    //       </div>
+    //       <button id="comment-menu" class="comment_menu" type="button">⋮</button>
+    //       <div id="menu-container" class="menu_container" style="display: none">
+    //           <ul id="menu" class="menu">
+    //               <li><button id="edit" type="button">Edit</button></li>
+    //               <li><button id="delete" type="button">Delete</button></li>
+    //           </ul>
+    //       </div>
+    //       <div id="modify-buttons" style="display: none">
+    //           <button id="save" class="modify_button">Save</button>
+    //           <button id="cancel" class="modify_button">Cancel</button>
+    //       </div>
+    //   </div>
+    //   <div id="review-text-container" class="review_text_container">
+    //       <p id="review-text" class="text" contenteditable="false">${this.review_text}</p>
+    //   </div>
+    // </div>
+
+    //   `;
 
       //give access to custom menu object (via script insert)
       const script = document.createElement('script');
