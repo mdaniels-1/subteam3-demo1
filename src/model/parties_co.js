@@ -30,7 +30,7 @@ db.createCollection("parties_co", {
           },
           Price: {
             bsonType: "double",
-            minimum: 0,
+            minimum: 0.00,
             description: "Price is required and must be a non-negative number"
           },
           StartDate: {

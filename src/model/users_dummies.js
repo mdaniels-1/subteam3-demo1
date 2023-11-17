@@ -1,6 +1,10 @@
 db.users_co.insertMany([
-    { username: "cooluser123" },
-    { username: "partygoer456" },
-    { username: "funseeker789" }
+    { username: "adventureseeker001" },
+    { username: "livemusiclover002" },
+    { username: "theaterbuff003" },
+    { username: "artenthusiast004" },
+    { username: "cinemafan005" },
+    { username: "bookworm006" },
+    { username: "gourmet007" },
+    { username: "traveljunkie008" }
 ]);
-  

@@ -40,7 +40,6 @@ class UserReview extends HTMLElement {
     // create inner html
     // NOTE: the script tag doesn't work here; it needs to be added via code
     // NOTE: if you're using VSCode, install the innerHTML Syntax Highlighting extension
-
     this.innerHTML = `
     <div id="user-review-container" class="user_review_container">
       <div id="profile-container" class="profile_container">
@@ -70,33 +69,6 @@ class UserReview extends HTMLElement {
       </div>
     </div>
     `;
-
-    // this.innerHTML = `
-    // <div id="user-review-container" class="user_review_container">
-    //   <div id="profile-container" class="profile_container">
-    //       <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" loading="lazy" width="52" id="profile_picture" alt="" class="pfp">
-    //       <div id="review_user_data" class="review_user_data">
-    //           <div id="username" class="text">${this.username}</div>
-    //           <div id="review-date" class="text">${this.review_date}</div>
-    //       </div>
-    //       <button id="comment-menu" class="comment_menu" type="button">⋮</button>
-    //       <div id="menu-container" class="menu_container" style="display: none">
-    //           <ul id="menu" class="menu">
-    //               <li><button id="edit" type="button">Edit</button></li>
-    //               <li><button id="delete" type="button">Delete</button></li>
-    //           </ul>
-    //       </div>
-    //       <div id="modify-buttons" style="display: none">
-    //           <button id="save" class="modify_button">Save</button>
-    //           <button id="cancel" class="modify_button">Cancel</button>
-    //       </div>
-    //   </div>
-    //   <div id="review-text-container" class="review_text_container">
-    //       <p id="review-text" class="text" contenteditable="false">${this.review_text}</p>
-    //   </div>
-    // </div>
-
-    //   `;
 
       //give access to custom menu object (via script insert)
       const script = document.createElement('script');
