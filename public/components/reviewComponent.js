@@ -70,10 +70,10 @@ class UserReview extends HTMLElement {
     </div>
     `;
 
-      //give access to custom menu object (via script insert)
-      const script = document.createElement('script');
-      script.src = '../src/reviewMenu.js';
-      document.body.appendChild(script);
+      // //give access to custom menu object (via script insert)
+      // const script = document.createElement('script');
+      // script.src = './components/reviewMenu.js';
+      // document.body.appendChild(script);
 
       // create script/event listener that will toggle menu on button click
       const elipsisButton = this.querySelector('#comment-menu');
