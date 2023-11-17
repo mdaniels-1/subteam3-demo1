@@ -9,6 +9,7 @@ const serveStaticFile = require('./views/staticFile.views.js');
 const handleReviewRequests = require('./routes/review.routes.js');
 
 const server = http.createServer((req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
     const parsedUrl = url.parse(req.url);
     const pathname = parsedUrl.pathname;
 
