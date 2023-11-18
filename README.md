@@ -74,10 +74,9 @@ This project follows the given directory structure with various components organ
 
 ## Additional Information
 
-- Make sure you have your .env file configured like so:
+- Make sure you have your .env file located in `/src` and configured like so:
     ```
-    MONGO_API_KEY=""
-    MONGO_USER=""
-    MONGO_USER_PASSWORD=""
+    MONGO_USER="your_first_name"
+    MONGO_USER_PASSWORD="your_password_which_chirag_shouldve_DMed_to_you_on_discord"
     ```
-- Make sure you have the necessary node dependencies. Rebuild your package with `npm ci` if needed.
+- Make sure you have the necessary node dependencies. Rebuild your package with `npm ci` to be safe.

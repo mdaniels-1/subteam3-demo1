@@ -5,20 +5,26 @@ function handleRequest(req, res) {
 
   const parsedUrl = new URL(req.url, "http://localhost:8080");
   if (
-    parsedUrl.pathname === "/api/reviews/getreview" &&
+    parsedUrl.pathname === "/api/reviews/get-one" &&
     req.method === "GET" &&
     parsedUrl.searchParams.has("review_id")
   ) {
-    console.log("handling request");
-    if (!res) {
-      console.error('Response object is undefined');
-      return;
-    }
-    
-    reviewController.getReviewDetails(
+    reviewController.getOneReviewByID(
       req,
       res,
       parsedUrl.searchParams.get("review_id")
+    );
+  } else if (
+    parsedUrl.pathname === "/api/reviews/get-latest-n" &&
+    req.method === "GET" &&
+    parsedUrl.searchParams.has("party_id"),
+    parsedUrl.searchParams.has("N")
+  ) {
+    reviewController.getNLatestReviewsOfParty(
+      req,
+      res,
+      parsedUrl.searchParams.get("party_id"),
+      parseInt(parsedUrl.searchParams.get("N"), 10)
     );
   }
 }
