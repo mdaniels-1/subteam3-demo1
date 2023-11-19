@@ -94,7 +94,7 @@ exports.getNLatestReviewsOfParty = async (req, res, party_id, N) => {
     // Fetch the latest N reviews for the provided 'party_id'
     // For each review, fetch the username and party title from their respective collections
     const reviews = await reviewsCollection.aggregate([
-      { $match: { party_id: new ObjectId(party_id) } },                             // Match the reviews by party_id
+      { $match: { party_id: new ObjectId(party_id) } },     // Match the reviews by party_id
       { $sort: { review_date: -1 } },                       // Sort by date descending
       { $limit: N },                                        // Limit to N documents
       { $lookup: {                                          // Lookup to add username
@@ -120,14 +120,60 @@ exports.getNLatestReviewsOfParty = async (req, res, party_id, N) => {
           review_text: 1,                                   // Add review_text to the output
       }}
     ]).toArray();
-
-  
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(reviews));
-  
   } catch (error) {
     console.error(error);
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ error: "Internal Server Error" }));
+  }
+}
+
+exports.createReview = async (req, res, user_id, party_id, review_date, rating, review_title, review_text) => {
+  // Validate the presence of the 'user_id' parameter
+  if (!user_id) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    console.error('user_id parameter is missing');
+    return res.end(JSON.stringify({ error: "user_id parameter is missing" }));
+  }
+  if (!party_id) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    console.error('party_id parameter is missing');
+    return res.end(JSON.stringify({ error: "party_id parameter is missing" }));
+  }
+  if (!review_date) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    console.error('review_date parameter is missing');
+    return res.end(JSON.stringify({ error: "review_date parameter is missing" }));
+  }
+  if (!rating) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    console.error('rating parameter is missing');
+    return res.end(JSON.stringify({ error: "rating parameter is missing" }));
+  }
+  if (!review_title) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    console.error('review_title parameter is missing');
+    return res.end(JSON.stringify({ error: "review_title parameter is missing" }));
+  }
+  if (!review_text) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    console.error('review_text parameter is missing');
+    return res.end(JSON.stringify({ error: "review_text parameter is missing" }));
+  }
+  try {
+    // Create a new review document
+    const review = {
+      user_id: new ObjectId(user_id),
+      party_id: new ObjectId(party_id),
+      review_date: review_date,
+      rating: rating,
+      review_title: review_title,
+      review_text: review_text
+    };
+  } catch (error) {
+    console.error(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify({ error: "Internal Server Error" }));
   }
 }
