@@ -19,11 +19,13 @@ function handleRequest(req, res) {
     // GET
     parsedUrl.pathname === "/api/reviews/get-latest-n" &&
     req.method === "GET" &&
-    parsedUrl.searchParams.has("party_id"),
+    parsedUrl.searchParams.has("party_id") && 
+    parsedUrl.searchParams.has("user_id") &&
     parsedUrl.searchParams.has("N")
   ) {
     reviewController.getNLatestReviewsOfParty(req, res,
       parsedUrl.searchParams.get("party_id"),
+      parsedUrl.searchParams.get("user_id"),
       parseInt(parsedUrl.searchParams.get("N"), 10)
     );
 

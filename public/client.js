@@ -40,9 +40,15 @@ function fetchOneReviewByReviewID(reviewId) {
     });
 }
 
-function fetchNLatestReviewsByPartyID(partyID, num) {
+function fetchNLatestReviewsByID(partyID, userID, num) {
   const url = new URL('/api/reviews/get-latest-n', 'http://localhost:8080');
-  url.searchParams.append('party_id', partyID);
+
+  if (partyID) {
+    url.searchParams.append('party_id', partyID);
+  }
+  if (userID) {
+    url.searchParams.append('user_id', userID);
+  }
   url.searchParams.append('N', num);
 
   fetch(url)
@@ -58,15 +64,11 @@ function fetchNLatestReviewsByPartyID(partyID, num) {
 
       data.forEach(review => {
         const userReview = document.createElement('user-review');
-        //userReview.setAttribute('user-id', review.user_id);
-        //userReview.setAttribute('party-id', review.party_id);
         userReview.setAttribute('username', review.username);
         userReview.setAttribute('review-date', formatDate(review.review_date));
         userReview.setAttribute('rating', review.rating);
         userReview.setAttribute('party-name', review.party_name);
-        //userReview.setAttribute('review-title', review.review_title);
         userReview.setAttribute('review-text', review.review_text);
-        
 
         // userReview.innerHTML = `<div>...</div>`; 
         reviewsContainer.appendChild(userReview);

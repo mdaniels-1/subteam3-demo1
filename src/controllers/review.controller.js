@@ -64,35 +64,34 @@ exports.getOneReviewByID = async (req, res, review_id) => {
   }
 };
 
-exports.getNLatestReviewsOfParty = async (req, res, party_id, N) => {
-  // Validate the presence of the 'party_id' parameter
-  if (!party_id) {
+exports.getNLatestReviewsOfParty = async (req, res, party_id, user_id, N) => {
+
+  // Validate the 'N' parameter, as it's always required.
+  if (!N || isNaN(N) || N < 0 || N > 10) {
     res.writeHead(400, { "Content-Type": "application/json" });
-    console.error('party_id parameter is missing');
-    return res.end(JSON.stringify({ error: "party_id parameter is missing" }));
+    const message = !N ? 'N parameter is missing' :
+                    isNaN(N) ? 'N is not a number' :
+                    'N is out of range [0, 10]';
+    console.error(message);
+    return res.end(JSON.stringify({ error: message }));
   }
 
-  // Validate the presence of the 'N' parameter. N is the number of reviews to return.
-  if (!N) {
+  // Construct the match condition based on provided parameters.
+  const matchCondition = {};
+  if (party_id) matchCondition.party_id = new ObjectId(party_id);
+  if (user_id) matchCondition.user_id = new ObjectId(user_id);
+
+  // If neither party_id nor user_id is provided, return an error.
+  if (Object.keys(matchCondition).length === 0) {
     res.writeHead(400, { "Content-Type": "application/json" });
-    console.error('N parameter is missing');
-    return res.end(JSON.stringify({ error: "N parameter is missing" }));
+    return res.end(JSON.stringify({ error: "Either party_id or user_id parameter is required" }));
   }
-  if (isNaN(N)) {
-    res.writeHead(400, { "Content-Type": "application/json" });
-    console.error('N is NaN.');
-    return res.end(JSON.stringify({ error: "N is NaN" }));
-  }
-  if (N < 0 || N > 10) {
-    res.writeHead(400, { "Content-Type": "application/json" });
-    console.error('N is out of range [0, 10].');
-    return res.end(JSON.stringify({ error: "N is out of range [0, 10]" }));
-  }
+
   try {
-    // Fetch the latest N reviews for the provided 'party_id'
+    // Fetch the latest N reviews for the provided party_id or user_id
     // For each review, fetch the username and party title from their respective collections
     const reviews = await reviewsCollection.aggregate([
-      { $match: { party_id: new ObjectId(party_id) } },     // Match the reviews by party_id
+      { $match: { ...matchCondition } },                    // Unpack the match condition
       { $sort: { review_date: -1 } },                       // Sort by date descending
       { $limit: N },                                        // Limit to N documents
       { $lookup: {                                          // Lookup to add username
@@ -114,7 +113,7 @@ exports.getNLatestReviewsOfParty = async (req, res, party_id, N) => {
           username: "$user_info.username",                  // Add username to the output
           review_date: 1,                                   // Add review_date to the output
           rating: 1,                                        // Add rating to the output
-          party_name: "$party_info.Name",                  // Add party name to the output
+          party_name: "$party_info.Name",                   // Add party name to the output
           review_text: 1,                                   // Add review_text to the output
       }}
     ]).toArray();
@@ -158,6 +157,13 @@ exports.createReview = async (req, res, user_id, party_id, review_date, rating, 
       res.writeHead(400, { "Content-Type": "application/json" });
       return res.end(JSON.stringify({ error: "User has already written a review for this party" }));
     }
+      // Check if the party exists
+    const partyExists = await partiesCollection.findOne({ _id: new ObjectId(party_id) });
+    if (!partyExists) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      return res.end(JSON.stringify({ error: "Party does not exist" }));
+    }
+
     // Create a new review document
     const review = {
       user_id: new ObjectId(user_id),
