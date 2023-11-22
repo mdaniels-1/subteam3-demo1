@@ -134,7 +134,7 @@ function isValidDate(dateString) {
 
 exports.createReview = async (req, res, user_id, party_id, review_date, rating, review_title, review_text) => {
   // Validate the presence of each parameter
-  const params = { review_id, user_id, party_id, review_date, rating, review_title, review_text };
+  const params = { user_id, party_id, review_date, rating, review_title, review_text };
   for (const [key, value] of Object.entries(params)) {
     if (!value) {
       res.writeHead(400, { "Content-Type": "application/json" });
@@ -176,14 +176,16 @@ exports.createReview = async (req, res, user_id, party_id, review_date, rating, 
     // Insert the review document into the 'reviews_co' collection
     console.log("Inserting review: ", review)
     const result = await reviewsCollection.insertOne(review);
-    // Check if the review was inserted
-    if(result.insertedCount === 1) {
-      console.log(`Review inserted successfully with the _id: ${result.insertedId}`);
+
+    // Check if the insert operation was successful
+    if(result.acknowledged === true && result.insertedId) {
+      console.log(`Review successfully created with the ID: ${result.insertedId}`);
       res.writeHead(201, { "Content-Type": "application/json" });
       return res.end(JSON.stringify({ message: "Review inserted successfully", id: result.insertedId }));
     } else {
-      throw new Error('Review insertion failed');
+      console.log("Failed to create review.");
     }
+
   } catch (error) {
     console.error(error);
     res.writeHead(500, { "Content-Type": "application/json" });
