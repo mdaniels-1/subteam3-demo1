@@ -54,7 +54,7 @@ exports.getOneReviewByID = async (req, res, review_id) => {
       res.writeHead(404, { "Content-Type": "application/json" });
       return res.end(JSON.stringify({ error: "Review not found" }));
     }
-    console.log(review);
+    console.log("Fetched review:", review);
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(review));
   } catch (error) {
@@ -64,37 +64,34 @@ exports.getOneReviewByID = async (req, res, review_id) => {
   }
 };
 
-exports.getNLatestReviewsOfParty = async (req, res, party_id, N) => {
-  // Validate the presence of the 'party_id' parameter
-  if (!party_id) {
+exports.getNLatestReviewsOfParty = async (req, res, party_id, user_id, N) => {
+
+  // Validate the 'N' parameter, as it's always required.
+  if (!N || isNaN(N) || N < 0 || N > 10) {
     res.writeHead(400, { "Content-Type": "application/json" });
-    console.error('party_id parameter is missing');
-    return res.end(JSON.stringify({ error: "party_id parameter is missing" }));
+    const message = !N ? 'N parameter is missing' :
+                    isNaN(N) ? 'N is not a number' :
+                    'N is out of range [0, 10]';
+    console.error(message);
+    return res.end(JSON.stringify({ error: message }));
   }
 
-  console.log('getNLatestReviewsOfParty: ', party_id, N);
+  // Construct the match condition based on provided parameters.
+  const matchCondition = {};
+  if (party_id) matchCondition.party_id = new ObjectId(party_id);
+  if (user_id) matchCondition.user_id = new ObjectId(user_id);
 
-  // Validate the presence of the 'N' parameter. N is the number of reviews to return.
-  if (!N) {
+  // If neither party_id nor user_id is provided, return an error.
+  if (Object.keys(matchCondition).length === 0) {
     res.writeHead(400, { "Content-Type": "application/json" });
-    console.error('N parameter is missing');
-    return res.end(JSON.stringify({ error: "N parameter is missing" }));
+    return res.end(JSON.stringify({ error: "Either party_id or user_id parameter is required" }));
   }
-  if (isNaN(N)) {
-    res.writeHead(400, { "Content-Type": "application/json" });
-    console.error('N is NaN.');
-    return res.end(JSON.stringify({ error: "N is NaN" }));
-  }
-  if (N < 0 || N > 10) {
-    res.writeHead(400, { "Content-Type": "application/json" });
-    console.error('N is out of range [0, 10].');
-    return res.end(JSON.stringify({ error: "N is out of range [0, 10]" }));
-  }
+
   try {
-    // Fetch the latest N reviews for the provided 'party_id'
+    // Fetch the latest N reviews for the provided party_id or user_id
     // For each review, fetch the username and party title from their respective collections
     const reviews = await reviewsCollection.aggregate([
-      { $match: { party_id: new ObjectId(party_id) } },                             // Match the reviews by party_id
+      { $match: { ...matchCondition } },                    // Unpack the match condition
       { $sort: { review_date: -1 } },                       // Sort by date descending
       { $limit: N },                                        // Limit to N documents
       { $lookup: {                                          // Lookup to add username
@@ -116,18 +113,174 @@ exports.getNLatestReviewsOfParty = async (req, res, party_id, N) => {
           username: "$user_info.username",                  // Add username to the output
           review_date: 1,                                   // Add review_date to the output
           rating: 1,                                        // Add rating to the output
-          party_name: "$party_info.Name",                  // Add party name to the output
+          party_name: "$party_info.Name",                   // Add party name to the output
           review_text: 1,                                   // Add review_text to the output
       }}
     ]).toArray();
-
-  
+    console.log("Fetched reviews:", reviews);
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(reviews));
-  
   } catch (error) {
     console.error(error);
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ error: "Internal Server Error" }));
+  }
+}
+
+function isValidDate(dateString) {
+  const tempDate = new Date(dateString);
+  return tempDate instanceof Date && !isNaN(tempDate);
+}
+
+exports.createReview = async (req, res, user_id, party_id, review_date, rating, review_title, review_text) => {
+  // Validate the presence of each parameter
+  const params = { user_id, party_id, review_date, rating, review_title, review_text };
+  for (const [key, value] of Object.entries(params)) {
+    if (!value) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      console.error(`${key} parameter is missing`);
+      return res.end(JSON.stringify({ error: `${key} parameter is missing` }));
+    }
+  }
+  if (!isValidDate(review_date)) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify({ error: "Invalid review_date format. Please use ISO 8601 format, e.g., '2023-03-01T13:00:00Z'." }));
+  }
+  
+  try {
+    // Check if the user has already reviewed this party
+    const existingReview = await reviewsCollection.findOne({
+      party_id: new ObjectId(party_id),
+      user_id: new ObjectId(user_id),
+    });
+    if (existingReview) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      return res.end(JSON.stringify({ error: "User has already written a review for this party" }));
+    }
+      // Check if the party exists
+    const partyExists = await partiesCollection.findOne({ _id: new ObjectId(party_id) });
+    if (!partyExists) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      return res.end(JSON.stringify({ error: "Party does not exist" }));
+    }
+
+    // Create a new review document
+    const review = {
+      user_id: new ObjectId(user_id),
+      party_id: new ObjectId(party_id),
+      review_date: new Date(review_date),
+      rating: parseInt(rating, 10),
+      review_title: review_title,
+      review_text: review_text
+    };
+    // Insert the review document into the 'reviews_co' collection
+    console.log("Inserting review: ", review)
+    const result = await reviewsCollection.insertOne(review);
+
+    // Check if the insert operation was successful
+    if(result.acknowledged === true && result.insertedId) {
+      console.log(`Review successfully created with the ID: ${result.insertedId}`);
+      res.writeHead(201, { "Content-Type": "application/json" });
+      return res.end(JSON.stringify({ message: "Review inserted successfully", id: result.insertedId }));
+    } else {
+      console.log("Failed to create review.");
+    }
+
+  } catch (error) {
+    console.error(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify({ error: "Internal Server Error" }));
+  }
+}
+
+exports.editReview = async (req, res, review_id, user_id, rating, review_title, review_text) => {
+  // Validate the presence of each parameter
+  const params = { review_id, user_id, rating, review_title, review_text };
+  for (const [key, value] of Object.entries(params)) {
+    if (!value) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      console.error(`${key} parameter is missing`);
+      return res.end(JSON.stringify({ error: `${key} parameter is missing` }));
+    }
+  }
+  try {
+    // Check if the user has reviewed this party
+    const existingReview = await reviewsCollection.findOne({
+      _id: new ObjectId(review_id),
+      user_id: new ObjectId(user_id),
+    });
+    if (!existingReview) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      console.log("User has not reviewed this party");
+      return res.end(JSON.stringify({ error: "User has not written a review for this party." }));
+    }
+    // Proceed to update the review
+    const parsedRating = parseInt(rating, 10);
+    const result = await reviewsCollection.updateOne(
+      { _id: new ObjectId(review_id) },
+      { $set: { rating: parsedRating, review_title, review_text } }
+    );
+
+    // Check if the update was successful
+    if (result.matchedCount === 0) {
+      res.writeHead(404, { "Content-Type": "application/json" });
+      console.log("No matching document found to update.");
+      return res.end(JSON.stringify({ error: "Review not found or user mismatch." }));
+    } else if (result.modifiedCount === 0) {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      console.log("Review found but no changes were made.");
+      return res.end(JSON.stringify({ message: "No changes were made to the review." }));
+    } else {
+      // The review was successfully edited
+      res.writeHead(200, { "Content-Type": "application/json" });
+      console.log("Review updated successfully.");
+      return res.end(JSON.stringify({ message: "Review updated successfully." }));
+    }
+  } catch (error) {
+    console.error(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify({ error: "Internal Server Error" }));
+  }
+}
+
+exports.deleteReview = async (req, res, review_id, user_id) => {
+  // Validate the presence of the 'review_id' and 'user_id' parameters
+  const params = { review_id, user_id };
+  for (const [key, value] of Object.entries(params)) {
+    if (!value) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      console.error(`${key} parameter is missing`);
+      return res.end(JSON.stringify({ error: `${key} parameter is missing` }));
+    }
+  }
+  try {
+    // Check if the user created this review
+    const existingReview = await reviewsCollection.findOne({
+      _id: new ObjectId(review_id),
+      user_id: new ObjectId(user_id),
+    });
+    if (!existingReview) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      console.log("User did not write this review");
+      return res.end(JSON.stringify({ error: "User did not write this review." }));
+    }
+    // Proceed to delete the review
+    const result = await reviewsCollection.deleteOne({ _id: new ObjectId(review_id) });
+    // Check if the review was deleted
+    if (result.deletedCount === 0) {
+      res.writeHead(404, { "Content-Type": "application/json" });
+      console.log("No matching document found to delete.");
+      return res.end(JSON.stringify({ error: "Review not found or user mismatch." }));
+    } else {
+      // The review was successfully deleted
+      res.writeHead(200, { "Content-Type": "application/json" });
+      console.log("Review deleted successfully.");
+      return res.end(JSON.stringify({ message: "Review deleted successfully." }));
+    }
+  
+  } catch (error) {
+    console.error(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify({ error: "Internal Server Error" }));
   }
 }

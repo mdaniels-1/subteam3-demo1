@@ -4,12 +4,15 @@ const url = require("url");
 // Import the route handlers
 const serveLandingPage = require('./views/landingPage.views.js');
 const servePartyReviewsPage = require('./views/partyReviewsPage.views.js');
-//const servePartyMapPage = require('./views/partyMapPage.views.js');
 const serveStaticFile = require('./views/staticFile.views.js');
 const handleReviewRequests = require('./routes/review.routes.js');
+const handleRsvpRequests = require('./routes/rsvp.routes.js');
+//const handleUserRequests = require('./routes/user.routes.js');
+//const handlePartyRequests = require('./routes/party.routes.js');
 
 const server = http.createServer((req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
+    // CORS Allow all origins
+    res.setHeader("Access-Control-Allow-Origin", "*");
     const parsedUrl = url.parse(req.url);
     const pathname = parsedUrl.pathname;
 
@@ -22,6 +25,12 @@ const server = http.createServer((req, res) => {
         serveStaticFile(req, res);
     } else if (pathname.startsWith('/api/reviews')) {
         handleReviewRequests(req, res);
+    } else if (pathname.startsWith('/api/rsvp')) {
+        handleRsvpRequests(req, res);
+    } else if (pathname.startsWith('/api/users')) {
+        //handleUserRequests(req, res);
+    } else if (pathname.startsWith('/api/parties')) {
+        //handlePartyRequests(req, res);
     } else {
         res.writeHead(404);
         res.end('Page not found');

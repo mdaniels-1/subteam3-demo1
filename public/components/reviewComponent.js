@@ -9,17 +9,12 @@ class UserReview extends HTMLElement {
   }
 
   generateStars(rating) {
-    // The ★ character represents a filled star
     const filledStar = '★';
-    // The ☆ character represents an unfilled star
     const unfilledStar = '☆';
-    // Start with an empty string for the stars
     let stars = '';
-    // Add filled stars up to the rating value
     for (let i = 0; i < rating; i++) {
       stars += filledStar;
     }
-    // Fill the rest with unfilled stars up to 10
     for (let i = rating; i < 10; i++) {
       stars += unfilledStar;
     }
