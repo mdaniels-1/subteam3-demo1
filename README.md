@@ -26,17 +26,21 @@ This project follows the given directory structure with various components organ
 │       └── test.html
 └── src
     ├── controllers
-    │   └── review.controller.js
+    │   ├── review.controller.js
+    │   └── rsvp.controller.js
     ├── model
     │   ├── notes.txt
     │   ├── parties_co.js
     │   ├── parties_dummies.js
     │   ├── reviews_co.js
     │   ├── reviews_dummies.js
+    │   ├── rsvps_co.js
+    │   ├── rsvps_dummies.js
     │   ├── users_co.js
     │   └── users_dummies.js
     ├── routes
-    │   └── review.routes.js
+    │   ├── review.routes.js
+    │   └── rsvp.routes.js
     ├── server.js
     └── views
         ├── landingPage.views.js
