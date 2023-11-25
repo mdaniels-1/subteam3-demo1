@@ -64,7 +64,7 @@ exports.getOneReviewByID = async (req, res, review_id) => {
   }
 };
 
-exports.getNLatestReviewsOfParty = async (req, res, party_id, user_id, N) => {
+exports.getNLatestReviewsByID = async (req, res, party_id, user_id, N) => {
 
   // Validate the 'N' parameter, as it's always required.
   if (!N || isNaN(N) || N < 0 || N > 10) {

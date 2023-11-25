@@ -7,7 +7,7 @@ const servePartyReviewsPage = require('./views/partyReviewsPage.views.js');
 const serveStaticFile = require('./views/staticFile.views.js');
 const handleReviewRequests = require('./routes/review.routes.js');
 const handleRsvpRequests = require('./routes/rsvp.routes.js');
-//const handleUserRequests = require('./routes/user.routes.js');
+const handleUserRequests = require('./routes/user.routes.js');
 //const handlePartyRequests = require('./routes/party.routes.js');
 
 const server = http.createServer((req, res) => {
@@ -28,7 +28,7 @@ const server = http.createServer((req, res) => {
     } else if (pathname.startsWith('/api/rsvp')) {
         handleRsvpRequests(req, res);
     } else if (pathname.startsWith('/api/users')) {
-        //handleUserRequests(req, res);
+        handleUserRequests(req, res);
     } else if (pathname.startsWith('/api/parties')) {
         //handlePartyRequests(req, res);
     } else {

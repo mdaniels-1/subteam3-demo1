@@ -23,7 +23,7 @@ function handleRequest(req, res) {
     parsedUrl.searchParams.has("user_id") &&
     parsedUrl.searchParams.has("N")
   ) {
-    reviewController.getNLatestReviewsOfParty(req, res,
+    reviewController.getNLatestReviewsByID(req, res,
       parsedUrl.searchParams.get("party_id"),
       parsedUrl.searchParams.get("user_id"),
       parseInt(parsedUrl.searchParams.get("N"), 10)

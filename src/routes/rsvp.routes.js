@@ -1,25 +1,20 @@
 const rsvpController = require("../controllers/rsvp.controller.js");
 
-function handleRsvpRequest(req, res) {
-  console.log(`rsvp.routes started`);
-  rsvpController.dbConnect();
-  console.log(`rsvp.routes dbconnect`);
+function handleRequest(req, res) {
+  reviewController.dbConnect();
 
   const parsedUrl = new URL(req.url, "http://localhost:8080");
   if (
-    parsedUrl.pathname === "/api/rsvp" &&
-    req.method === "POST" &&
-    parsedUrl.searchParams.has("party_id") &&
-    parsedUrl.searchParams.has("user_id")
+    // GET
+    parsedUrl.pathname === "/api/reviews/get-one" &&
+    req.method === "GET" &&
+    parsedUrl.searchParams.has("review_id")
   ) {
-    console.log(`parses passed.`);
-    rsvpController.rsvpToParty(
-      req,
-      res,
-      parsedUrl.searchParams.get("party_id"),
-      parsedUrl.searchParams.get("user_id")
+    reviewController.getOneReviewByID(req, res,
+      parsedUrl.searchParams.get("review_id")
     );
   } else {
+    // NOT FOUND
     res.writeHead(404, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ error: "Endpoint not found" }));
   }

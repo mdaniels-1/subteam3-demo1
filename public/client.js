@@ -42,13 +42,8 @@ function fetchOneReviewByReviewID(reviewId) {
 
 function fetchNLatestReviewsByID(partyID, userID, num) {
   const url = new URL('/api/reviews/get-latest-n', 'http://localhost:8080');
-
-  if (partyID) {
-    url.searchParams.append('party_id', partyID);
-  }
-  if (userID) {
-    url.searchParams.append('user_id', userID);
-  }
+  url.searchParams.append('party_id', partyID);
+  url.searchParams.append('user_id', userID);
   url.searchParams.append('N', num);
 
   fetch(url)
