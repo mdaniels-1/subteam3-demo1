@@ -1,23 +1,20 @@
-const rsvpController = require("../controllers/users.controller.js");
+const usersController = require("../controllers/users.controller.js");
 
 function handleUserRequest(req, res) {
-  console.log(`users.routes started`);
-  rsvpController.dbConnect();
-  console.log(`users.routes dbconnect`);
+  usersController.dbConnect();
 
   const parsedUrl = new URL(req.url, "http://localhost:8080");
   if (
-    parsedUrl.pathname === "/api/rsvp" &&
-    req.method === "POST" &&
-    parsedUrl.searchParams.has("party_id") &&
-    parsedUrl.searchParams.has("user_id")
+    parsedUrl.pathname === "/api/users/login" &&
+    req.method === "GET" &&
+    parsedUrl.searchParams.has("username") &&
+    parsedUrl.searchParams.has("password")
   ) {
-    console.log(`parses passed.`);
-    rsvpController.rsvpToParty(
+    usersController.login(
       req,
       res,
-      parsedUrl.searchParams.get("party_id"),
-      parsedUrl.searchParams.get("user_id")
+      parsedUrl.searchParams.get("username"),
+      parsedUrl.searchParams.get("password")
     );
   } else {
     res.writeHead(404, { "Content-Type": "application/json" });
