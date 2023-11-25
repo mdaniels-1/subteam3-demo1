@@ -7,7 +7,7 @@ const servePartyReviewsPage = require('./views/partyReviewsPage.views.js');
 const serveStaticFile = require('./views/staticFile.views.js');
 const handleReviewRequests = require('./routes/review.routes.js');
 const handleRsvpRequests = require('./routes/rsvp.routes.js');
-const handleUserRequests = require('./routes/user.routes.js');
+const handleUserRequests = require('./routes/users.routes.js');
 //const handlePartyRequests = require('./routes/party.routes.js');
 
 const server = http.createServer((req, res) => {

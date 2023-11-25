@@ -1,6 +1,6 @@
 const rsvpController = require("../controllers/rsvp.controller.js");
 
-function handleRequest(req, res) {
+function handleRsvpRequest(req, res) {
   reviewController.dbConnect();
 
   const parsedUrl = new URL(req.url, "http://localhost:8080");

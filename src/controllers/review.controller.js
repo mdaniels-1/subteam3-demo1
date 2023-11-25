@@ -110,6 +110,7 @@ exports.getNLatestReviewsByID = async (req, res, party_id, user_id, N) => {
       { $unwind: { path: "$party_info", preserveNullAndEmptyArrays: true } },
       { $project: {                                         // Define the structure of the output documents
           _id: 1,
+          review_title: 1,                                  // Add review_title to the output  
           username: "$user_info.username",                  // Add username to the output
           review_date: 1,                                   // Add review_date to the output
           rating: 1,                                        // Add rating to the output

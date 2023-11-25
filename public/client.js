@@ -16,6 +16,36 @@ function formatDate(dateString) {
   return formatter.format(date);
 }
 
+function login(username, password) {
+  const url = new URL('/api/users/login', 'http://localhost:8080');
+  url.searchParams.append('username', username);
+  url.searchParams.append('password', password);
+
+  fetch(url)
+    .then(response => {
+      const databaseResponse = document.getElementById('database-response');
+      if (!response.ok) {
+        sessionStorage.setItem('user_id', '');
+        databaseResponse.textContent = 'Login failed. Please try again.';
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      const databaseResponse = document.getElementById('database-response');
+      if (data.user_id) {
+        sessionStorage.setItem('user_id', data.user_id);
+        databaseResponse.textContent = 'Login successful. User_id: ' + data.user_id;
+      } else {
+        console.error('Login failed:', data);
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+}
+
+
 function fetchOneReviewByReviewID(reviewId) {
   const url = new URL('/api/reviews/get-one', 'http://localhost:8080');
   url.searchParams.append('review_id', reviewId);
@@ -59,6 +89,8 @@ function fetchNLatestReviewsByID(partyID, userID, num) {
 
       data.forEach(review => {
         const userReview = document.createElement('user-review');
+        userReview.setAttribute('review-id', review._id);
+        userReview.setAttribute('review-title', review.review_title);
         userReview.setAttribute('username', review.username);
         userReview.setAttribute('review-date', formatDate(review.review_date));
         userReview.setAttribute('rating', review.rating);
