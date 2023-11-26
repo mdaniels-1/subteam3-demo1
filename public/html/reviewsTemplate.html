@@ -48,7 +48,8 @@
           <textarea id="dev-review-text" name="review_text" rows="4"></textarea>
 
           <button id="dev-submit-button" onclick="submitReview(
-
+            sessionStorage.getItem('user_id'),
+            sessionStorage.getItem('party_id_array'),
             document.getElementById('dev-review-title').value,
             document.getElementById('dev-review-text').value,
             document.getElementById('dev-review-rating').value

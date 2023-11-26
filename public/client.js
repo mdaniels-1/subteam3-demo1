@@ -57,7 +57,6 @@ function fetchLatestParties(num) {
       return response.json();
     })
     .then(data => {
-      // Assuming 'data' is an array of party objects or names
       sessionStorage.setItem('party_id_array', data);
       populateDropdown('dev-party-dropdown', data);
     })
@@ -67,16 +66,12 @@ function fetchLatestParties(num) {
 }
 
 function populateDropdown(dropdownId, parties) {
-  // Get the select element by its ID
   const select = document.getElementById(dropdownId);
-  select.innerHTML = ''; // Clear existing options
-
-  // Create and append the options
+  select.innerHTML = '';
   parties.forEach(party => {
     const option = document.createElement('option');
     
-    option.textContent = party.Name || party // use 'party' if it's a string
-    //option.value = party.id || party; // use 'party' if it's a string
+    option.textContent = party.Name || party;
 
     select.appendChild(option);
   });
