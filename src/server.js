@@ -8,7 +8,7 @@ const serveStaticFile = require('./views/staticFile.views.js');
 const handleReviewRequests = require('./routes/review.routes.js');
 const handleRsvpRequests = require('./routes/rsvp.routes.js');
 const handleUserRequests = require('./routes/users.routes.js');
-//const handlePartyRequests = require('./routes/party.routes.js');
+const handlePartyRequests = require('./routes/party.routes.js');
 
 const server = http.createServer((req, res) => {
     // CORS Allow all origins
@@ -30,7 +30,7 @@ const server = http.createServer((req, res) => {
     } else if (pathname.startsWith('/api/users')) {
         handleUserRequests(req, res);
     } else if (pathname.startsWith('/api/parties')) {
-        //handlePartyRequests(req, res);
+        handlePartyRequests(req, res);
     } else {
         res.writeHead(404);
         res.end('Page not found');

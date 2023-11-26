@@ -45,6 +45,51 @@ function login(username, password) {
     });
 }
 
+function fetchLatestParties(num) {
+  const url = new URL('/api/parties/get-latest-n', 'http://localhost:8080');
+  url.searchParams.append('N', num);
+  
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Assuming 'data' is an array of party objects or names
+      sessionStorage.setItem('party_id_array', data);
+      populateDropdown('dev-party-dropdown', data);
+    })
+    .catch(error => {
+      console.error('Fetching error:', error);
+    });
+}
+
+function populateDropdown(dropdownId, parties) {
+  // Get the select element by its ID
+  const select = document.getElementById(dropdownId);
+  select.innerHTML = ''; // Clear existing options
+
+  // Create and append the options
+  parties.forEach(party => {
+    const option = document.createElement('option');
+    
+    option.textContent = party.Name || party // use 'party' if it's a string
+    //option.value = party.id || party; // use 'party' if it's a string
+
+    select.appendChild(option);
+  });
+}
+
+function submitReview(partyID, userID, rating, reviewTitle, reviewText) {
+  const url = new URL('/api/reviews/create', 'http://localhost:8080');
+  url.searchParams.append('user_id', userID);
+  url.searchParams.append('party_id', partyID);
+  url.searchParams.append('rating', rating);
+  url.searchParams.append('review_title', reviewTitle);
+  url.searchParams.append('review_text', reviewText);
+}
 
 function fetchOneReviewByReviewID(reviewId) {
   const url = new URL('/api/reviews/get-one', 'http://localhost:8080');

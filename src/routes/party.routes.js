@@ -1,7 +1,7 @@
-const usersController = require("../controllers/users.controller.js");
+const partiesController = require("../controllers/party.controller.js");
 
 function handlePartyRequest(req, res) {
-  usersController.dbConnect();
+  partiesController.dbConnect();
 
   const parsedUrl = new URL(req.url, "http://localhost:8080");
   if (
@@ -9,7 +9,7 @@ function handlePartyRequest(req, res) {
     req.method === "GET" &&
     parsedUrl.searchParams.has("N")
   ) {
-    usersController.login(
+    partiesController.getNLatestParties(
       req,
       res,
       parsedUrl.searchParams.get("N")
