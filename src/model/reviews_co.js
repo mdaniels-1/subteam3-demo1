@@ -5,17 +5,13 @@ db.createCollection("reviews_co", {
             bsonType: "object",
             required: ["user_id", "party_id", "review_date", "rating", "review_title", "review_text"],
             properties: {
-                _id: {
-                    bsonType: "objectId",
-                    description: "_id is the primary key and must be an ObjectId"
-                },
                 user_id: {
-                    bsonType: "objectId",
-                    description: "user_id is required and must be an ObjectId"
+                    bsonType: "string",
+                    description: "user_id is required and must be an string"
                 },
                 party_id: {
-                    bsonType: "objectId",
-                    description: "party_id is required and must be an ObjectId"
+                    bsonType: "string",
+                    description: "party_id is required and must be an string"
                 },
                 review_date: {
                     bsonType: "date",

@@ -23,7 +23,7 @@ function login(username, password) {
 
   fetch(url)
     .then(response => {
-      const databaseResponse = document.getElementById('database-response');
+      const databaseResponse = document.getElementById('user-database-response');
       if (!response.ok) {
         sessionStorage.setItem('user_id', '');
         databaseResponse.textContent = 'Login failed. Please try again.';
@@ -32,7 +32,7 @@ function login(username, password) {
       return response.json();
     })
     .then(data => {
-      const databaseResponse = document.getElementById('database-response');
+      const databaseResponse = document.getElementById('user-database-response');
       if (data.user_id) {
         sessionStorage.setItem('user_id', data.user_id);
         databaseResponse.textContent = 'Login successful. User_id: ' + data.user_id;
@@ -57,15 +57,15 @@ function fetchLatestParties(num) {
       return response.json();
     })
     .then(data => {
-      sessionStorage.setItem('party_id_array', data);
-      populateDropdown('dev-party-dropdown', data);
+      sessionStorage.setItem('party_array', JSON.stringify(data));
+      populatePartyDropdown('dev-party-dropdown', data);
+      populatePartyDropdown('dev-reviews-by-party-dropdown', data);
     })
     .catch(error => {
       console.error('Fetching error:', error);
     });
 }
-
-function populateDropdown(dropdownId, parties) {
+function populatePartyDropdown(dropdownId, parties) {
   const select = document.getElementById(dropdownId);
   select.innerHTML = '';
   parties.forEach(party => {
@@ -77,14 +77,66 @@ function populateDropdown(dropdownId, parties) {
   });
 }
 
-function submitReview(partyID, userID, rating, reviewTitle, reviewText) {
-  const url = new URL('/api/reviews/create', 'http://localhost:8080');
-  url.searchParams.append('user_id', userID);
-  url.searchParams.append('party_id', partyID);
-  url.searchParams.append('rating', rating);
-  url.searchParams.append('review_title', reviewTitle);
-  url.searchParams.append('review_text', reviewText);
+
+
+async function submitReview(partyID, userID, rating, reviewTitle, reviewText) {
+  try {
+    const url = new URL('/api/reviews/create', 'http://localhost:8080');
+
+    // Check if userID is provided
+    if (!userID) {
+      throw new Error('Please login first.');
+    }
+    if (!partyID) {
+      throw new Error('Please select a party first.');
+    }
+
+    // Append parameters to the URL
+    url.searchParams.append('user_id', userID);
+    url.searchParams.append('party_id', partyID);
+    url.searchParams.append('review_date', new Date().toISOString());
+    url.searchParams.append('rating', rating);
+    url.searchParams.append('review_title', reviewTitle);
+    url.searchParams.append('review_text', reviewText);
+
+    // Options for the fetch call
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: userID,
+        party_id: partyID,
+        rating: rating,
+        review_title: reviewTitle,
+        review_text: reviewText
+      }),
+    };
+
+    // Perform the network request
+    const response = await fetch(url, options);
+    const databaseResponse = document.getElementById('review-database-response');
+    // Check if the request was successful
+    if (!response.ok) {
+      response.text().then((text) => {
+        databaseResponse.textContent = 'Review submission failed. ' + text;
+      });
+      throw new Error(`HTTP error! status: ${response.status}, ${await response.text()}`);
+    }
+
+    // Process the response (assuming JSON data)
+    const data = await response.json();
+    console.log('Review submitted successfully:', data);
+    databaseResponse.textContent = 'Review submission successful.';
+  } catch (error) {
+    console.error('Error submitting review:', error);
+    // Handle errors, such as by displaying a message to the user
+    // Depending on the application's structure, you might want to rethrow the error,
+    // return null, or handle it in some other way
+  }
 }
+
 
 function fetchOneReviewByReviewID(reviewId) {
   const url = new URL('/api/reviews/get-one', 'http://localhost:8080');

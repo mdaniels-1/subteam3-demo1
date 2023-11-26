@@ -16,6 +16,16 @@ function handleUserRequest(req, res) {
       parsedUrl.searchParams.get("username"),
       parsedUrl.searchParams.get("password")
     );
+  } else if (
+    parsedUrl.pathname === "/api/users/get-latest-n" &&
+    req.method === "GET" &&
+    parsedUrl.searchParams.has("N")
+  ) {
+    usersController.getNLatestUsers(
+      req,
+      res,
+      parsedUrl.searchParams.get("N")
+    );
   } else {
     res.writeHead(404, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ error: "Endpoint not found" }));

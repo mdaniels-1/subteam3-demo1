@@ -13,7 +13,7 @@ if (result.error) {
   console.log('.env file loaded successfully');
 }
 
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_USER_PASSWORD}@atlascluster.bvzvel0.mongodb.net/?retryWrites=true&w=majority`;
 const mongoClient = new MongoClient(uri, {
   serverApi: {
@@ -65,3 +65,30 @@ exports.login = async (req, res, username, password) => {
     res.end(JSON.stringify({ error: "Internal Server Error" }));
   }
 };
+
+exports.getNLatestUsers = async (req, res, N) => {
+  // Validate the 'N' parameter, as it's always required.
+  if (!N || isNaN(N) || N < 0 || N > 10) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    const message = !N ? 'N parameter is missing' :
+                    isNaN(N) ? 'N is not a number' :
+                    'N is out of range [0, 10]';
+    console.error(message);
+    return res.end(JSON.stringify({ error: message }));
+  }
+  try {
+    // Fetch the latest N users
+    const users = await usersCollection
+      .find({}, { projection: { _id: 0, username: 1 } })
+      .sort({ _id: -1 })
+      .limit(parseInt(N, 10))
+      .toArray();
+    console.log("Fetched latest N users:", users);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(users));
+  } catch (error) {
+    console.error(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "Internal Server Error" }));
+  }
+}

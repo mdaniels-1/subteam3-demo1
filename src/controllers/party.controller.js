@@ -13,7 +13,7 @@ if (result.error) {
   console.log('.env file loaded successfully');
 }
 
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_USER_PASSWORD}@atlascluster.bvzvel0.mongodb.net/?retryWrites=true&w=majority`;
 const mongoClient = new MongoClient(uri, {
   serverApi: {
