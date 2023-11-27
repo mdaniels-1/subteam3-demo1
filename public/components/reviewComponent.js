@@ -113,9 +113,9 @@ class UserReview extends HTMLElement {
       const deleteButton = this.querySelector('#delete');
       deleteButton.addEventListener('click', () => {
         console.log("delete");
+        deleteReview(this.getAttribute("review-id"), sessionStorage.getItem('user_id'));
         menu.style.display = "none";
         // button.disabled = false;
-
       });
 
       // SAVE EDIT
@@ -130,6 +130,13 @@ class UserReview extends HTMLElement {
         modifyingButtons.style.display = "none";
 
         //send request to server
+        editReivew(
+          this.getAttribute("review-id"),
+          sessionStorage.getItem('user_id'),
+          this.getAttribute("rating"),
+          this.getAttribute("review-title"),
+          content.textContent
+        );
       });
 
       // CANCEL EDIT

@@ -16,6 +16,7 @@ function formatDate(dateString) {
   return formatter.format(date);
 }
 
+// Fetches from temporary users collection users_co
 function login(username, password) {
   const url = new URL('/api/users/login', 'http://localhost:8080');
   url.searchParams.append('username', username);
@@ -45,6 +46,7 @@ function login(username, password) {
     });
 }
 
+// Fetches from temporary parties collection parties_co
 function fetchLatestParties(num) {
   const url = new URL('/api/parties/get-latest-n', 'http://localhost:8080');
   url.searchParams.append('N', num);
@@ -65,6 +67,7 @@ function fetchLatestParties(num) {
       console.error('Fetching error:', error);
     });
 }
+
 function populatePartyDropdown(dropdownId, parties) {
   const select = document.getElementById(dropdownId);
   select.innerHTML = '';
@@ -131,9 +134,6 @@ async function submitReview(partyID, userID, rating, reviewTitle, reviewText) {
     databaseResponse.textContent = 'Review submission successful.';
   } catch (error) {
     console.error('Error submitting review:', error);
-    // Handle errors, such as by displaying a message to the user
-    // Depending on the application's structure, you might want to rethrow the error,
-    // return null, or handle it in some other way
   }
 }
 
@@ -145,7 +145,9 @@ function fetchOneReviewByReviewID(reviewId) {
   fetch(url)
     .then(response => {
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        return response.text().then(body => {
+          throw new Error(`HTTP error! status: ${response.status}, body: ${body}`);
+        });
       }
       return response.json();
     })
@@ -171,7 +173,9 @@ function fetchNLatestReviewsByID(partyID, userID, num) {
   fetch(url)
     .then(response => {
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        return response.text().then(body => {
+          throw new Error(`HTTP error! status: ${response.status}, body: ${body}`);
+        });
       }
       return response.json();
     })
@@ -196,4 +200,63 @@ function fetchNLatestReviewsByID(partyID, userID, num) {
     .catch((error) => {
       console.error('Fetch error:', error);
     });
+}
+
+function editReivew(reviewID, userID, rating, reviewTitle, reviewText) {
+  const url = new URL('/api/reviews/edit', 'http://localhost:8080');
+  url.searchParams.append('review_id', reviewID);
+  url.searchParams.append('user_id', userID);
+  url.searchParams.append('rating', rating);
+  url.searchParams.append('review_title', reviewTitle);
+  url.searchParams.append('review_text', reviewText);
+  fetch(url, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json',
+    }
+  })
+  .then(response => {
+      if (!response.ok) {
+        return response.text().then(body => {
+          alert(body, "Please query again to see original review.");
+          throw new Error(`HTTP error! status: ${response.status}, body: ${body}`);
+        });
+      }
+      return response.json();
+  })
+  .then(data => {
+      console.log(data);
+  })
+  .catch(error => {
+      console.error('There was an error editing the review:', error);
+  })
+  
+}
+
+function deleteReview(reviewID, userID) {
+  const url = new URL('/api/reviews/delete', 'http://localhost:8080');
+  url.searchParams.append('review_id', reviewID);
+  url.searchParams.append('user_id', userID);
+  fetch(url, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json',
+    }
+  })
+  .then(response => {
+      if (!response.ok) {
+        return response.text().then(body => {
+          alert(body);
+          throw new Error(`HTTP error! status: ${response.status}, body: ${body}`);
+        });
+      }
+      return response.json();
+  })
+  .then(data => {
+      console.log(data);
+  })
+  .catch(error => {
+      console.error('There was an error deleting the review:', error);
+  });
+
 }

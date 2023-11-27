@@ -214,7 +214,7 @@ exports.editReview = async (req, res, review_id, user_id, rating, review_title, 
     if (!existingReview) {
       res.writeHead(400, { "Content-Type": "application/json" });
       console.log("User has not reviewed this party");
-      return res.end(JSON.stringify({ error: "User has not written a review for this party." }));
+      return res.end(JSON.stringify({ error: "User has not written a review for this party or user-review mismatch" }));
     }
     // Proceed to update the review
     const parsedRating = parseInt(rating, 10);

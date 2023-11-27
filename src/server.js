@@ -28,8 +28,10 @@ const server = http.createServer((req, res) => {
     } else if (pathname.startsWith('/api/rsvp')) {
         handleRsvpRequests(req, res);
     } else if (pathname.startsWith('/api/users')) {
+        // Fetches from temporary simplified users collection!
         handleUserRequests(req, res);
     } else if (pathname.startsWith('/api/parties')) {
+        // Fetches from temporary simplified parties collection!
         handlePartyRequests(req, res);
     } else {
         res.writeHead(404);
