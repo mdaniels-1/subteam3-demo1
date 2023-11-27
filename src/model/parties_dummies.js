@@ -1,6 +1,7 @@
 // Inserting sample data
   db.parties_co.insertMany([
     {
+        _id: crypto.randomUUID(),
         Name: 'Easton Ave Halloween Post Party',
         Description: "We'll have lots of Fun!\n ",
         AddressLine1: '100 Easton Avenue',
@@ -18,6 +19,7 @@
         PersonCapacity: 100
     },
     {
+        _id: crypto.randomUUID(),
         Name: 'Techno Night',
         Description: "Let's rave! The best DJs in town, an unforgettable light show, and endless dancing.",
         AddressLine1: '600 Club Lane',
@@ -35,6 +37,7 @@
         PersonCapacity: 300
     },
     {
+        _id: crypto.randomUUID(),
         Name: 'End of Semester Bash',
         Description: "Celebrate the end of the semester with us. DJ, dancing, and fun!",
         AddressLine1: '200 College Avenue',
@@ -52,6 +55,7 @@
         PersonCapacity: 150
     },
     {
+        _id: crypto.randomUUID(),
         Name: 'Spring Fling',
         Description: "Spring is here, and so is our annual fling. Live music, food, and games!",
         AddressLine1: '300 George Street',
@@ -69,6 +73,7 @@
         PersonCapacity: 200
     },
     {
+        _id: crypto.randomUUID(),
         Name: 'Beach Bonfire Night',
         Description: "Join us by the shore for a night of bonfire, stories, and s'mores!",
         AddressLine1: '400 Ocean Avenue',
@@ -86,6 +91,7 @@
         PersonCapacity: 80
     },
     {
+        _id: crypto.randomUUID(),
         Name: 'Rooftop Jazz Evening',
         Description: "Experience an evening filled with smooth jazz, skyline views, and fine wine.",
         AddressLine1: '500 Skyline Drive',
@@ -103,6 +109,7 @@
         PersonCapacity: 50
     },
     {
+        _id: crypto.randomUUID(),
         Name: 'Murder Mystery Dinner',
         Description: "A night of mystery and intrigue awaits. Can you solve the crime?",
         AddressLine1: '700 Mystery Blvd',
@@ -120,6 +127,7 @@
         PersonCapacity: 60
     },
     {
+        _id: crypto.randomUUID(),
         Name: 'Country Hoedown',
         Description: "Grab your boots and join us for a hoedown with live country bands, line dancing, and BBQ.",
         AddressLine1: '800 Farm Road',

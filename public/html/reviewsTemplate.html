@@ -9,58 +9,14 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/reviewMenu.css">
 
-
     <title>Party Reviews</title>
 
   </head>
   <body>
     <nav-bar></nav-bar>
 
-    <!-- Developer's Box -->
-    <div id="dev-box" style="background-color: #f9f9f9; padding: 20px; margin-top: 20px;">
-      <h2>Developer's Testing Box</h2>
-
-      <div class="input-group">
-        <label for="dev-username-dropdown">Logged-in as user:</label>
-        <select id="dev-username-dropdown">
-          <!-- Options will be populated later -->
-        </select>
-
-        <label for="dev-party-dropdown">Write review about this party:</label>
-        <select id="dev-party-dropdown">
-          <!-- Options will be populated later -->
-        </select>
-      </div>
-
-      <div class="input-group">
-        <label for="dev-review-rating">Rating:</label>
-        <input type="number" id="dev-review-rating" name="rating" min="0" max="10" step="1">
-      </div>
-
-      <div class="input-group">
-        <label for="dev-review-title">Review Title:</label>
-        <input type="text" id="dev-review-title" name="review_title">
-      </div>
-
-      <div class="input-group">
-        <label for="dev-review-text">Review Text:</label>
-        <textarea id="dev-review-text" name="review_text" rows="4"></textarea>
-      </div>
-
-      <div class="input-group">
-        <label for="dev-reviews-by-party-dropdown">View reviews by party:</label>
-        <select id="dev-reviews-by-party-dropdown">
-          <!-- Options will be populated later -->
-        </select>
-
-        <label for="dev-reviews-by-user-dropdown">View reviews by user:</label>
-        <select id="dev-reviews-by-user-dropdown">
-          <!-- Options will be populated later -->
-        </select>
-      </div>
-    </div>
-
-
+    <!-- Temporary Developer's Box -->
+    <dev-box></dev-box>
 
     <div id="reviews-container">
       <!-- Custom elements (user reviews) will be inserted here -->
@@ -72,13 +28,8 @@
     <script src="../components/footer.js"></script>
     <script src="../client.js"></script>
 
-    <script>
-      window.onload = () => {
-        fetchNLatestReviewsByPartyID('6557d93c0bb1397e7d44075c', 8);
-      };
-    </script>
-
-
+    <!-- Temporary Developer's Box Scripts -->
+    <script src="../components/devBox.js"></script>
 
   </body>
 </html>

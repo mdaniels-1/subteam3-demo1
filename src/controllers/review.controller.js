@@ -13,7 +13,7 @@ if (result.error) {
   console.log('.env file loaded successfully');
 }
 
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_USER_PASSWORD}@atlascluster.bvzvel0.mongodb.net/?retryWrites=true&w=majority`;
 const mongoClient = new MongoClient(uri, {
   serverApi: {
@@ -64,7 +64,7 @@ exports.getOneReviewByID = async (req, res, review_id) => {
   }
 };
 
-exports.getNLatestReviewsOfParty = async (req, res, party_id, user_id, N) => {
+exports.getNLatestReviewsByID = async (req, res, party_id, user_id, N) => {
 
   // Validate the 'N' parameter, as it's always required.
   if (!N || isNaN(N) || N < 0 || N > 10) {
@@ -78,8 +78,8 @@ exports.getNLatestReviewsOfParty = async (req, res, party_id, user_id, N) => {
 
   // Construct the match condition based on provided parameters.
   const matchCondition = {};
-  if (party_id) matchCondition.party_id = new ObjectId(party_id);
-  if (user_id) matchCondition.user_id = new ObjectId(user_id);
+  if (party_id) matchCondition.party_id = party_id;
+  if (user_id) matchCondition.user_id = user_id;
 
   // If neither party_id nor user_id is provided, return an error.
   if (Object.keys(matchCondition).length === 0) {
@@ -110,6 +110,7 @@ exports.getNLatestReviewsOfParty = async (req, res, party_id, user_id, N) => {
       { $unwind: { path: "$party_info", preserveNullAndEmptyArrays: true } },
       { $project: {                                         // Define the structure of the output documents
           _id: 1,
+          review_title: 1,                                  // Add review_title to the output  
           username: "$user_info.username",                  // Add username to the output
           review_date: 1,                                   // Add review_date to the output
           rating: 1,                                        // Add rating to the output
@@ -150,15 +151,15 @@ exports.createReview = async (req, res, user_id, party_id, review_date, rating, 
   try {
     // Check if the user has already reviewed this party
     const existingReview = await reviewsCollection.findOne({
-      party_id: new ObjectId(party_id),
-      user_id: new ObjectId(user_id),
+      party_id: party_id,
+      user_id: user_id,
     });
     if (existingReview) {
       res.writeHead(400, { "Content-Type": "application/json" });
       return res.end(JSON.stringify({ error: "User has already written a review for this party" }));
     }
       // Check if the party exists
-    const partyExists = await partiesCollection.findOne({ _id: new ObjectId(party_id) });
+    const partyExists = await partiesCollection.findOne({ _id: party_id });
     if (!partyExists) {
       res.writeHead(400, { "Content-Type": "application/json" });
       return res.end(JSON.stringify({ error: "Party does not exist" }));
@@ -166,8 +167,9 @@ exports.createReview = async (req, res, user_id, party_id, review_date, rating, 
 
     // Create a new review document
     const review = {
-      user_id: new ObjectId(user_id),
-      party_id: new ObjectId(party_id),
+      _id: crypto.randomUUID(),
+      user_id: user_id,
+      party_id: party_id,
       review_date: new Date(review_date),
       rating: parseInt(rating, 10),
       review_title: review_title,
@@ -206,18 +208,18 @@ exports.editReview = async (req, res, review_id, user_id, rating, review_title, 
   try {
     // Check if the user has reviewed this party
     const existingReview = await reviewsCollection.findOne({
-      _id: new ObjectId(review_id),
-      user_id: new ObjectId(user_id),
+      _id: review_id,
+      user_id: user_id,
     });
     if (!existingReview) {
       res.writeHead(400, { "Content-Type": "application/json" });
       console.log("User has not reviewed this party");
-      return res.end(JSON.stringify({ error: "User has not written a review for this party." }));
+      return res.end(JSON.stringify({ error: "User has not written a review for this party or user-review mismatch" }));
     }
     // Proceed to update the review
     const parsedRating = parseInt(rating, 10);
     const result = await reviewsCollection.updateOne(
-      { _id: new ObjectId(review_id) },
+      { _id: review_id },
       { $set: { rating: parsedRating, review_title, review_text } }
     );
 
@@ -256,8 +258,8 @@ exports.deleteReview = async (req, res, review_id, user_id) => {
   try {
     // Check if the user created this review
     const existingReview = await reviewsCollection.findOne({
-      _id: new ObjectId(review_id),
-      user_id: new ObjectId(user_id),
+      _id: review_id,
+      user_id: user_id,
     });
     if (!existingReview) {
       res.writeHead(400, { "Content-Type": "application/json" });
@@ -265,7 +267,7 @@ exports.deleteReview = async (req, res, review_id, user_id) => {
       return res.end(JSON.stringify({ error: "User did not write this review." }));
     }
     // Proceed to delete the review
-    const result = await reviewsCollection.deleteOne({ _id: new ObjectId(review_id) });
+    const result = await reviewsCollection.deleteOne({ _id: review_id });
     // Check if the review was deleted
     if (result.deletedCount === 0) {
       res.writeHead(404, { "Content-Type": "application/json" });

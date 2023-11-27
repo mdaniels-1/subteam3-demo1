@@ -9,6 +9,7 @@ This project follows the given directory structure with various components organ
 ├── public
 │   ├── client.js
 │   ├── components
+│   │   ├── devBox.js
 │   │   ├── footer.js
 │   │   ├── navigation.js
 │   │   ├── reviewComponent.js
@@ -26,8 +27,10 @@ This project follows the given directory structure with various components organ
 │       └── test.html
 └── src
     ├── controllers
+    │   ├── party.controller.js
     │   ├── review.controller.js
-    │   └── rsvp.controller.js
+    │   ├── rsvp.controller.js
+    │   └── users.controller.js
     ├── model
     │   ├── notes.txt
     │   ├── parties_co.js
@@ -39,8 +42,10 @@ This project follows the given directory structure with various components organ
     │   ├── users_co.js
     │   └── users_dummies.js
     ├── routes
+    │   ├── party.routes.js
     │   ├── review.routes.js
-    │   └── rsvp.routes.js
+    │   ├── rsvp.routes.js
+    │   └── users.routes.js
     ├── server.js
     └── views
         ├── landingPage.views.js
