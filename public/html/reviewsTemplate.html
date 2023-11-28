@@ -9,30 +9,14 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/reviewMenu.css">
 
-
     <title>Party Reviews</title>
 
   </head>
   <body>
     <nav-bar></nav-bar>
 
-    <!-- Developer's Box -->
-    <div id="dev-box" style="background-color: #f9f9f9; padding: 20px; margin-top: 20px;">
-      <h2>Developer's Testing Box</h2>
-      <div>
-        <input type="text" id="dev-username" placeholder="Enter Username" />
-        <input type="text" id="dev-party-id" placeholder="Enter Party ID" />
-      </div>
-      <div>
-        <button onclick="createReview()">Create Review</button>
-        <button onclick="deleteReview()">Delete Review</button>
-        <button onclick="editReview()">Edit Review</button>
-      </div>
-      <!-- Optionally, add more fields for review details -->
-      <textarea id="dev-review-text" placeholder="Enter Review Text"></textarea>
-      <input type="number" id="dev-review-rating" placeholder="Enter Rating (0-10)" min="0" max="10" />
-      <!-- Add other fields as needed for your testing -->
-    </div>
+    <!-- Temporary Developer's Box -->
+    <dev-box></dev-box>
 
     <div id="reviews-container">
       <!-- Custom elements (user reviews) will be inserted here -->
@@ -44,31 +28,8 @@
     <script src="../components/footer.js"></script>
     <script src="../client.js"></script>
 
-    <script>
-      // Implement the functions called by the buttons here or in an external script file.
-      function createReview() {
-        // Get values from text fields
-        // Call your function to create a review
-      }
-
-      function deleteReview() {
-        // Get values from text fields
-        // Call your function to delete a review
-      }
-
-      function editReview() {
-        // Get values from text fields
-        // Call your function to edit a review
-      }
-    </script>
-
-    <script>
-      window.onload = () => {
-        fetchNLatestReviewsByPartyID('6557d93c0bb1397e7d44075c', 8);
-      };
-    </script>
-
-
+    <!-- Temporary Developer's Box Scripts -->
+    <script src="../components/devBox.js"></script>
 
   </body>
 </html>

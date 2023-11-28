@@ -13,6 +13,7 @@ const handlePartyRequests = require('./routes/party.routes.js');
 const serveScanTicketsPage = require('./views/scan-tickets.view.js');
 const handleScanTicketsRequests = require('./routes/scan-tickets.routes.js');
 
+
 const server = http.createServer((req, res) => {
     // CORS Allow all origins
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -40,7 +41,7 @@ const server = http.createServer((req, res) => {
         serveScanTicketsPage(req, res);
     } else if (pathname.startsWith('/api/scan-tickets')){
         handleScanTicketsRequests(req, res);
-    }else {
+    } else {
         res.writeHead(404);
         res.end('Page not found');
     }

@@ -1,6 +1,8 @@
 class UserReview extends HTMLElement {
   constructor() {
     super();
+    this.review_id = "";
+    this.review_title = "";
     this.username = "";
     this.rating = 0;
     this.review_date = "";
@@ -9,17 +11,12 @@ class UserReview extends HTMLElement {
   }
 
   generateStars(rating) {
-    // The ★ character represents a filled star
     const filledStar = '★';
-    // The ☆ character represents an unfilled star
     const unfilledStar = '☆';
-    // Start with an empty string for the stars
     let stars = '';
-    // Add filled stars up to the rating value
     for (let i = 0; i < rating; i++) {
       stars += filledStar;
     }
-    // Fill the rest with unfilled stars up to 10
     for (let i = rating; i < 10; i++) {
       stars += unfilledStar;
     }
@@ -27,6 +24,8 @@ class UserReview extends HTMLElement {
   }
 
   connectedCallback() {
+    this.review_id = this.getAttribute("review-id");
+    this.review_title = this.getAttribute("review-title");
     this.username = this.getAttribute("username");
     this.rating = parseInt(this.getAttribute("rating"));
     this.review_date = this.getAttribute("review-date");
@@ -45,10 +44,14 @@ class UserReview extends HTMLElement {
       <div id="profile-container" class="profile_container">
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" loading="lazy" width="52" id="profile_picture" alt="" class="pfp">
         <div id="review_user_data" class="review_user_data">
-          <div id="username" class="text">${this.username}</div>
-          <div id="review-date" class="text">${this.review_date}</div>
+          <div id="review-title" class="text"><strong>${this.review_title}</strong></div>
+          <!-- Wrap username and date in a single div and use inline display -->
+          <div class="text">
+            <span id="username">${this.username}</span> on <span id="review-date">${this.review_date}</span>
+          </div>
           <div id="rating" class="rating">${this.generateStars(this.rating)}</div>
         </div>
+
         <button id="comment-menu" class="comment_menu" type="button">⋮</button>
         <div id="menu-container" class="menu_container" style="display: none">
           <ul id="menu" class="menu">
@@ -110,9 +113,9 @@ class UserReview extends HTMLElement {
       const deleteButton = this.querySelector('#delete');
       deleteButton.addEventListener('click', () => {
         console.log("delete");
+        deleteReview(this.getAttribute("review-id"), sessionStorage.getItem('user_id'));
         menu.style.display = "none";
         // button.disabled = false;
-
       });
 
       // SAVE EDIT
@@ -127,6 +130,13 @@ class UserReview extends HTMLElement {
         modifyingButtons.style.display = "none";
 
         //send request to server
+        editReivew(
+          this.getAttribute("review-id"),
+          sessionStorage.getItem('user_id'),
+          this.getAttribute("rating"),
+          this.getAttribute("review-title"),
+          content.textContent
+        );
       });
 
       // CANCEL EDIT
