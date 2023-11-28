@@ -12,7 +12,6 @@ function handleRsvpRequest(req, res) {
     parsedUrl.searchParams.has("party_id") &&
     parsedUrl.searchParams.has("user_id")
   ) {
-    console.log(`parses passed.`);
     rsvpController.rsvpToParty(
       req,
       res,
