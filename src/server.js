@@ -1,15 +1,21 @@
+
 const http = require ("http");
 const url = require("url");
 
 // Import the route handlers
 const serveLandingPage = require('./views/landingPage.views.js');
 const servePartyReviewsPage = require('./views/partyReviewsPage.views.js');
-//const servePartyMapPage = require('./views/partyMapPage.views.js');
 const serveStaticFile = require('./views/staticFile.views.js');
 const handleReviewRequests = require('./routes/review.routes.js');
+const handleRsvpRequests = require('./routes/rsvp.routes.js');
+const handleUserRequests = require('./routes/users.routes.js');
+const handlePartyRequests = require('./routes/party.routes.js');
+const serveScanTicketsPage = require('./views/scan-tickets.view.js');
+const handleScanTicketsRequests = require('./routes/scan-tickets.routes.js');
 
 const server = http.createServer((req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
+    // CORS Allow all origins
+    res.setHeader("Access-Control-Allow-Origin", "*");
     const parsedUrl = url.parse(req.url);
     const pathname = parsedUrl.pathname;
 
@@ -22,7 +28,19 @@ const server = http.createServer((req, res) => {
         serveStaticFile(req, res);
     } else if (pathname.startsWith('/api/reviews')) {
         handleReviewRequests(req, res);
-    } else {
+    } else if (pathname.startsWith('/api/rsvp')) {
+        handleRsvpRequests(req, res);
+    } else if (pathname.startsWith('/api/users')) {
+        // Fetches from temporary simplified users collection!
+        handleUserRequests(req, res);
+    } else if (pathname.startsWith('/api/parties')) {
+        // Fetches from temporary simplified parties collection!
+        handlePartyRequests(req, res);
+    }else if(pathname.startsWith('/scan-tickets')){
+        serveScanTicketsPage(req, res);
+    } else if (pathname.startsWith('/api/scan-tickets')){
+        handleScanTicketsRequests(req, res);
+    }else {
         res.writeHead(404);
         res.end('Page not found');
     }
@@ -35,4 +53,10 @@ server.listen(port, host, () => {
 });
 
 module.exports = server;
+
+
+
+
+
+
 
