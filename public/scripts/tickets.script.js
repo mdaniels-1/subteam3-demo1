@@ -1,4 +1,4 @@
-function scanQRCode() {
+async function scanQRCode() {
 
   // get html objects: video and canvas
   // in order to use JSQR, a canvas object must be utilized for it to read off of
@@ -23,8 +23,13 @@ function scanQRCode() {
   
   if (code) {
       ticketNumber.innerText = 'TICKET NUMBER: ' + code.data;
-      success = sendTicketUpdateRequest(code.data);
-      status.innerText = "CONFIRMED";
+      scanResult = await sendTicketUpdateRequest(code.data); //server reponse for scanning ticket
+      console.log("Scanned " + scanResult);
+      if(scanResult == "Ticket updated successfully"){
+        status.innerText = scanResult;
+      }else{
+        status.innerText = scanResult;
+      }
 
       videoElement.style.border = '6px solid green';
     // Perform desired actions with the QR code data
@@ -39,7 +44,7 @@ function scanQRCode() {
 
 // sends a request to the server to update the ticket to "attended"
 // returns "success" or "fail" responses
-function sendTicketUpdateRequest(id){
+async function sendTicketUpdateRequest(id){
   const url = new URL('/api/scan-tickets/update-ticket', 'http://localhost:8080');
   url.searchParams.append('id', id);
 
@@ -50,18 +55,22 @@ function sendTicketUpdateRequest(id){
     } 
   };
 
+  let result = "";
+
   fetch(url, options)
   .then(response => response.json())
   .then(data => {
-    console.log(data);
+    console.log("me " + data.message);
     // process the response data
-    return "yes";
+    return data;
   })
   .catch(error => {
     console.error(error);
     // handle the error
-    return "no";
+    return data.json();
   });
+
+  // return result;
   
 
 }
