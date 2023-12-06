@@ -2,8 +2,18 @@ db.createCollection("parties_co", {
     validator: {
       $jsonSchema: {
         bsonType: "object",
-        required: ["Name", "Description", "AddressLine1", "City", "EndDate", "Guests", "Price", "StartDate", "State", "Zip", "HostName"],
+        required: [
+          "HostID", "Name", "Description", "AddressLine1", "City",
+          "EndDate", "Guests", "Price", "StartDate",
+          "State", "Zip", "HostName", "HostDescription",
+          "PersonCapacity", "AlcoholPolicy", "DressCode", "Theme",
+          "Discounted", "Promoted", "Latitude", "Longitude"
+        ],
         properties: {
+          HostID: {
+            bsonType: "string",
+            description: "HostID is required and must be a string"
+          },
           Name: {
             bsonType: "string",
             description: "Name is required and must be a string"
@@ -20,6 +30,18 @@ db.createCollection("parties_co", {
             bsonType: "string",
             description: "City is required and must be a string"
           },
+          State: {
+            bsonType: "string",
+            description: "State is required and must be a string"
+          },
+          Zip: {
+            bsonType: "string",
+            description: "Zip is required and must be a string"
+          },
+          StartDate: {
+            bsonType: "date",
+            description: "StartDate is required and must be a date"
+          },
           EndDate: {
             bsonType: "date",
             description: "EndDate is required and must be a date"
@@ -33,21 +55,46 @@ db.createCollection("parties_co", {
             minimum: 0.00,
             description: "Price is required and must be a non-negative number"
           },
-          StartDate: {
-            bsonType: "date",
-            description: "StartDate is required and must be a date"
-          },
-          State: {
-            bsonType: "string",
-            description: "State is required and must be a string"
-          },
-          Zip: {
-            bsonType: "string",
-            description: "Zip is required and must be a string"
-          },
           HostName: {
             bsonType: "string",
             description: "HostName is required and must be a string"
+          },
+          HostDescription: {
+            bsonType: "string",
+            description: "HostDescription must be a string"
+          },
+          AlcoholPolicy: {
+            bsonType: "string",
+            description: "AlcoholPolicy is required and must be a string"
+          },
+          PersonCapacity: {
+            bsonType: "int",
+            minimum: 0,
+            description: "PersonCapacity is required and must be a non-negative integer"
+          },
+          DressCode: {
+            bsonType: "string",
+            description: "DressCode is required and must be a string"
+          },
+          Theme: {
+            bsonType: "string",
+            description: "Theme is required and must be a string"
+          },
+          Discounted: {
+            bsonType: "bool",
+            description: "Discounted is required and must be a boolean"
+          },
+          Promoted: {
+            bsonType: "bool",
+            description: "Promoted is required and must be a boolean"
+          },
+          Latitude: {
+            bsonType: "double",
+            description: "Latitude is required and must be a double"
+          },
+          Longitude: {
+            bsonType: "double",
+            description: "Longitude is required and must be a double"
           }
         }
       }

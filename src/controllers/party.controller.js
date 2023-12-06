@@ -60,3 +60,7 @@ exports.getNLatestParties = async (req, res, N) => {
     res.end(JSON.stringify({ error: "Internal Server Error" }));
   }
 }
+
+exports.createParty = async (req, res) => {
+  
+}
