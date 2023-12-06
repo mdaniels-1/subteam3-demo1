@@ -52,6 +52,18 @@ tickets_co.insertMany([
         ticket_id: "ticket 2",
         status: "not attended",
     },
+    {
+      user_id: new ObjectId("6557d49e3a8bf89eb36bb17b"), 
+      party_id: new ObjectId("6557d93c0bb1397e7d44075e"),
+      ticket_id: "ticket 3",
+      status: "not attended",
+    },
+    {
+      user_id: new ObjectId("6557d49e3a8bf89eb36bb17b"), 
+      party_id: new ObjectId("6557d93c0bb1397e7d44075e"),
+      ticket_id: "ticket 4",
+      status: "not attended",
+    },
     
 ]);
   
