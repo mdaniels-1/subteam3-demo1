@@ -38,10 +38,10 @@ db.createCollection("tickets_co", {
             bsonType: "object",
             required: ["user_id", "party_id", "ticket_id", "status"],
             properties: {
-                _id: {
-                    bsonType: "objectId",
-                    description: "_id is the primary key and must be an ObjectId"
-                },
+                // _id: {
+                //     bsonType: "objectId",
+                //     description: "_id is the primary key and must be an ObjectId"
+                // },
                 user_id: {
                     bsonType: "objectId",
                     description: "user_id is required and must be an ObjectId"

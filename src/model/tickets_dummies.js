@@ -2,8 +2,9 @@
 // tickets_dummies.js
 // this file creates some sample dummy tickets
 
-const dotenv = require("dotenv");
-const path = require("path");
+const dotenv = require('dotenv');
+const path = require('path');
+const crypto = require('crypto');
 
 // console.log(path.dirname(process.cwd()));
 
