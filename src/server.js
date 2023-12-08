@@ -14,6 +14,7 @@ const serveScanTicketsPage = require("./views/scan-tickets.view.js");
 const handleScanTicketsRequests = require("./routes/scan-tickets.routes.js");
 const handleMapRequests = require("./routes/maps.routes.js");
 const handlePartyRequests = require("./routes/party.routes.js");
+const handleEditAttendanceRequests = require("./routes/editAttendance.routes.js");
 
 const router = require("./routes/seba_router.js");
 let serverST2 = new Server(8000, "localhost");
@@ -36,6 +37,9 @@ const server = http.createServer((req, res) => {
     handleReviewRequests(req, res);
   } else if (pathname.startsWith("/api/rsvp")) {
     handleRsvpRequests(req, res);
+  } else if (pathname.startsWith("/api/edit-attendance")) {
+    handleEditAttendanceRequests(req, res);
+    console.log("server attendance handler called")
   } else if (pathname.startsWith("/api/users")) {
     // Fetches from temporary simplified users collection!
     handleUserRequests(req, res);
@@ -59,7 +63,7 @@ const server = http.createServer((req, res) => {
     serverST2.getUserInfo(UUID);
   } else if (pathname.startsWith("user?edit_profile")) {
     serverST2.updateUserInfo(UUID);
-  } else if (pathname.startsWith("user?del_profile")) {
+  }else if (pathname.startsWith("user?del_profile")) {
     serverST2.deleteUser(UUID);
   } else if (req.url.startsWith("/party_listings")) {
     handlePartyReviewRequests(req, res);
@@ -68,8 +72,8 @@ const server = http.createServer((req, res) => {
     handleMapRequests(req, res);
     return;
   } else {
-    response.writeHead(404);
-    response.end("Not Found");
+    res.writeHead(404);
+    res.end("Not Found");
   }
 });
 
