@@ -19,7 +19,18 @@
         
         <nav-bar></nav-bar>
 
-        <h1>Host Information</h1>
+        <div class="my-information-containter">
+            <h1>My Information</h1>
+            <div>
+                <p>Name: </p>
+                <p>Description:</p>
+                <p>College Affiliation: </p>
+                <p>Social Media Links:</p>
+                <!-- <ul>
+                    <li><a href="https://www.google.com" target="blank"></a></li>
+                </ul> -->
+            </div>
+        </div>
         
         <div class="my-events-container">
             <h1>My Events</h1>
@@ -27,6 +38,8 @@
             </div>   
             <script>
                 updateMyEvents();
+                const id = "5d4dd653-c7a1-4fd0-a7a3-f871467756ad";
+                getPartiesByHost(id);
             </script> 
 
             

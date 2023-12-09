@@ -29,7 +29,7 @@ let partiesCollection;
 exports.dbConnect = async () => {
     const db = mongoClient.db("dummy_db");
     partiesCollection = db.collection("parties_co");
-  };
+};
   
 
 exports.getNLatestParties = async (req, res, N) => {
@@ -54,6 +54,29 @@ exports.getNLatestParties = async (req, res, N) => {
     console.log("Fetched reviews:", latestDocuments);
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(latestDocuments));
+  } catch (error) {
+    console.error(error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "Internal Server Error" }));
+  }
+}
+
+
+exports.getPartiesByHost = async (req, res, id) => {
+  //check if host_id exists
+  if(!id || isNaN(id)){
+    res.writeHead(400, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify({ error: "host_id parameter is missing" }));
+  }
+
+  const query = {host_id: id};
+
+  // fetch all parties that this host owns
+  try {
+    const p = await partiesCollection.find(query).toArray();
+    console.log(p);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({parties: "parties"}));
   } catch (error) {
     console.error(error);
     res.writeHead(500, { "Content-Type": "application/json" });

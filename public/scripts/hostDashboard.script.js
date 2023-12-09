@@ -15,7 +15,7 @@ async function getPartiesByHost(id){
     fetch(url, options)
     .then(response => response.json())
     .then(data => {
-      console.log("me " + data.message);
+      console.log("data:\n" + data);
       // process the response data
       return data;
     })
@@ -47,4 +47,5 @@ async function getPartiesByHost(id){
 
     
   }
+
 

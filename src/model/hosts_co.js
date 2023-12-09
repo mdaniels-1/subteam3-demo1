@@ -32,31 +32,48 @@ const mongoClient = new MongoClient(uri, {
 
 const db = mongoClient.db("dummy_db");
 
-db.createCollection("tickets_co", {
+db.createCollection("hosts_co", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["user_id", "party_id", "ticket_id", "status"],
+            required: ["host_id", "parties", "name", "description", "collegeAffiliation", "socialMediaLinks", "reviews"],
             properties: {
-                // _id: {
-                //     bsonType: "objectId",
-                //     description: "_id is the primary key and must be an ObjectId"
-                // },
-                user_id: {
+                host_id: {
                     bsonType: "string",
-                    description: "user_id is required and must be an ObjectId"
+                    description: "_id is the primary key and must be a string (UUID)"
                 },
-                party_id: {
-                    bsonType: "string",
-                    description: "party_id is required and must be an ObjectId"
+                parties: {
+                    bsonType: "array",
+                    items: {
+                        bsonType: "string"
+                    },
+                    description: "parties is required and must be an array of strings (UUID)"
                 },
-                ticket_id: {
+                name: {
                     bsonType: "string",
-                    description: "ticket_id is required and must be a string"
+                    description: "name is required and must be a string"
                 },
-                status: {
+                description: {
                     bsonType: "string",
-                    description: "status is required and must be a string"
+                    description: "description is required and must be a string"
+                },
+                collegeAffiliation: {
+                    bsonType: "string",
+                    description: "collegeAffiliation is required and must be a string"
+                },
+                socialMediaLinks: {
+                    bsonType: "array",
+                    items:{
+                        bsonType: "string"
+                    },
+                    description: "socialMediaLinks is required and must be an array of strings"
+                },
+                reviews: {
+                    bsonType: "array",
+                    items:{
+                        bsonType: "string"
+                    },
+                    description: "reviews is required and must be an array of strings"
                 }
             }
         }
