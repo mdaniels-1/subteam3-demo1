@@ -46,7 +46,7 @@ exports.getOneReviewByID = async (req, res, review_id) => {
   try {
     // Fetch the review details using the provided 'review_id'
     const review = await reviewsCollection.findOne({
-      _id: new ObjectId(review_id),
+      _id: review_id,
     });
 
     // If review not found, return 404 error

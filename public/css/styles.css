@@ -103,6 +103,15 @@ video{
     margin-right: 5px;
 }
 
+#title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+#description{
+    font-style: italic;
+}
 
 
 

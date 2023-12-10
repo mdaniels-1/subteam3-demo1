@@ -24,8 +24,7 @@ class partyComponent extends HTMLElement {
 
             <div class="brief-party-details">
                 <p id="title">${this.title}</p>
-                <p id="location">${this.location}</p>
-                <p id="date">${this.startDate}</p>
+                <p id="location-date">${this.location}  |  ${this.startDate}</p>
                 <p id="description">${this.description}</p>
             </div>
 
