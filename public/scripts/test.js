@@ -1,4 +1,4 @@
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 const path = require("path");
 
 // Debug: Log the expected path of the .env file
@@ -28,8 +28,8 @@ let partiesCollection;
 
 // Connect to MongoDB and set up collections for use
 async function dbConnect(){
-    const db = mongoClient.db("dummy_db");
-    partiesCollection = db.collection("parties_co");
+    const db = mongoClient.db("Map");
+    partiesCollection = await db.collection("Parties");
     console.log("connected to db");
 };
 
@@ -40,30 +40,40 @@ async function pbh(i){
   }
   try {
     await dbConnect();
-    const query = {host_id: i};
+    const query = {HostID: "656d0bc954b790022840f8f2"};
 
     // const p = partiesCollection.find(query).toArray();
-    await partiesCollection.find(query).toArray(function(err, documents) {
-      if (err) {
-        console.error('Error retrieving documents:', err);
-        return;
-      }
-  
-      console.log('Documents:', documents);
-    });
+    let p = await partiesCollection.find({HostId: i}).toArray();
+    return p;
   } catch (error) {
     console.log(error);
+    return [];
   }
 
 }
-const id = "5d4dd653-c7a1-4fd0-a7a3-f871467756ad";
+const id = "656d0bc954b790022840f8f2";
 
 async function gogo(){
   await dbConnect();
-  await pbh(id);
-  await console.log('done');
+  let parties = await pbh(id);
+  await console.log(parties[0].Name);
+  // updateMyEvents(parties);
 }
 
-gogo();
+
+async function updateMyEvents(arr){
+
+  const divElement = document.getElementById('scrollable-events-data');
+
+  arr.forEach((party) => {
+    let customElement = document.createElement('party-component');
+    customElement.setAttribute("title", party.Name);
+    customElement.setAttribute("description", party.Description);
+    customElement.setAttribute("startDate", party.StartDate.toString());
+
+    divElement.appendChild(customElement); // append party element to event list
+    console.log("hello");
+  });
+}
 
 

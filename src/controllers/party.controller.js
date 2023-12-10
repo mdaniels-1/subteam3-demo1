@@ -64,22 +64,27 @@ exports.getNLatestParties = async (req, res, N) => {
 
 exports.getPartiesByHost = async (req, res, id) => {
   //check if host_id exists
-  if(!id || isNaN(id)){
+  if(!id){
     res.writeHead(400, { "Content-Type": "application/json" });
-    return res.end(JSON.stringify({ error: "host_id parameter is missing" }));
+    return res.end(JSON.stringify({ error: "host_id parameter is missing" + structuredClone(id)}));
   }
 
-  const query = {host_id: id};
+  const query = {HostId: id};
 
   // fetch all parties that this host owns
   try {
-    const p = await partiesCollection.find(query).toArray();
-    console.log(p);
+    const d = await mongoClient.db("Map");
+    const coll = await d.collection("Parties");
+
+    const p = await coll.find(query).toArray();
+
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({parties: "parties"}));
+    res.end(JSON.stringify(p));
   } catch (error) {
     console.error(error);
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ error: "Internal Server Error" }));
   }
 }
+
+
