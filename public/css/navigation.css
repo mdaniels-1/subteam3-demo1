@@ -129,7 +129,7 @@
     right: 0;
 }
 
-#login, #register{
-/* #profile{ */
+/* #login, #register{ */
+#profile{
     display: none;
 }
