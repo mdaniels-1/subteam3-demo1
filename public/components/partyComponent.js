@@ -75,8 +75,7 @@ class partyComponent extends HTMLElement {
         });
 
     }
-
-
+    
   }
   
   customElements.define("party-component", partyComponent);
